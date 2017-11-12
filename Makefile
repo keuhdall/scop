@@ -22,7 +22,7 @@ $(NAME): $(OBJ)
 		make -C libft
 		mv libft/libft.a .
 		gcc -Wall -g -Werror -Wextra -c $(SRC)
-		gcc -Wall -g -Werror -Wextra -L. -lft -framework OpenGL -framework GLUT $(OBJ) -o $(NAME)
+		gcc -Wall -g -Werror -Wextra -lglfw -L. -lft -framework OpenGL -framework GLUT $(OBJ) -o $(NAME)
 
 clean:
 		make -C libft clean
