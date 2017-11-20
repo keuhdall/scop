@@ -6,11 +6,11 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2017/11/12 19:58:05 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/11/20 01:29:29 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLFW/glfw3.h>
-#include "libft/libft.h"
+#include "../libft/libft.h"
