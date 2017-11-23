@@ -16,8 +16,10 @@ SRC_PATH=./srcs
 INC_PATH=./includes
 OBJ_PATH=./objs
 LIBFT_PATH=./libft
-GLFW_INC_PATH=/usr/local/Cellar/glfw/3.2.1/include/
-GLFW_LIB_PATH= /usr/local/Cellar/glfw/3.2.1/lib/
+#GLFW_INC_PATH=/usr/local/Cellar/glfw/3.2.1/include/
+GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
+#GLFW_LIB_PATH= /usr/local/Cellar/glfw/3.2.1/lib/
+GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 
 SRC_NAME = scop.c \
 
