@@ -34,5 +34,7 @@ int	main(int argc, char *argv[])
 		return (-1);
 	}
 	glfwMakeContextCurrent(win);
+	while (!glfwWindowShouldClose(win))
+		glfwPollEvents();
 	return (0);
 }
