@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop.h                                             :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2017/11/20 01:29:29 by lmarques         ###   ########.fr       */
+/*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
+/*   Updated: 2017/11/23 22:24:47 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLFW/glfw3.h>
-#include "../libft/libft.h"
-#include "../libft/get_next_line.h"
+#include "../includes/scop.h"
 
-typedef struct	s_scop
+void	check_fd(int fd)
 {
-}				t_scop;
-
-void			check_fd(int fd);
+	if (fd < 0)
+	{
+		ft_putendl("error");
+		exit(1);
+	}
+}
