@@ -22,6 +22,9 @@ GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
 GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 
 SRC_NAME = scop.c \
+			error_handling.c \
+			reader.c \
+			utils.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
