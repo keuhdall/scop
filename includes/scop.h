@@ -24,4 +24,4 @@ typedef struct	s_scop
 }				t_scop;
 
 void			check_fd(int fd);
-void			init_window(t_scop *s);
+void			init(t_scop *s);
