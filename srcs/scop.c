@@ -18,18 +18,7 @@ int	main(int argc, char *argv[])
 
 	if (!argc)
 		ft_putendl(argv[0]);
-	if (!glfwInit())
-	{
-		ft_putendl("error initializing glfw");
-		exit(1);
-	}
-	init_window(&s);
-	glewExperimental = GL_TRUE;
-	if (glewInit() != GLEW_OK)
-	{
-		ft_putendl("glew failed");
-		exit(1);
-	}
+	init(&s);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
@@ -46,7 +35,7 @@ int	main(int argc, char *argv[])
 	GLuint vbo = 0;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), points, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
 
 	GLuint vao = 0;
 	glGenVertexArrays(1, &vao);
@@ -66,7 +55,7 @@ int	main(int argc, char *argv[])
 	"#version 410\n"
 	"out vec4 frag_colour;"
 	"void main() {"
-	"  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);"
+	"  frag_colour = vec4(0.0, 1.0, 0.0, 1.0);"
 	"}";
 
 	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
