@@ -16,10 +16,14 @@ SRC_PATH=./srcs
 INC_PATH=./includes
 OBJ_PATH=./objs
 LIBFT_PATH=./libft
-#GLFW_INC_PATH=/usr/local/Cellar/glfw/3.2.1/include/
-GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
-#GLFW_LIB_PATH= /usr/local/Cellar/glfw/3.2.1/lib/
-GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
+
+GLFW_INC_PATH=/usr/local/Cellar/glfw/3.2.1/include/
+GLEW_INC_PATH=/usr/local/Cellar/glew/2.1.0/include/
+GLFW_LIB_PATH=/usr/local/Cellar/glfw/3.2.1/lib/
+GLEW_LIB_PATH=/usr/local/Cellar/glew/2.1.0/lib/
+
+#GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
+#GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 
 SRC_NAME = scop.c \
 			error_handling.c \
@@ -38,11 +42,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C $(LIBFT_PATH)
-	$(CC) $^ -o $@ -L$(GLFW_LIB_PATH) -lglfw -L$(LIBFT_PATH) -lft -framework OpenGL -framework GLUT
+	$(CC) $^ -o $@ -L$(GLFW_LIB_PATH) -lglfw -L$(GLEW_LIB_PATH) -lglew -L$(LIBFT_PATH) -lft -framework OpenGL -framework GLUT
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) -o $@ -c $< $(CFLAGS) -I$(INC_PATH) -I$(LIBFT_PATH) -I$(GLFW_INC_PATH)
+	$(CC) -o $@ -c $< $(CFLAGS) -I$(INC_PATH) -I$(LIBFT_PATH) -I$(GLFW_INC_PATH) -I$(GLEW_INC_PATH)
 
 clean:
 	rm -fv $(OBJ)
