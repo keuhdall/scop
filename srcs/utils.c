@@ -14,12 +14,6 @@
 
 void	init_window(t_scop *s)
 {
-	if (!glfwInit())
-	{
-		ft_putendl("error initializing glfw");
-		exit(1);
-	}
-	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
