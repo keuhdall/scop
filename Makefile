@@ -26,9 +26,9 @@ GLEW_LIB_PATH=/usr/local/Cellar/glew/2.1.0/lib/
 #GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 
 SRC_NAME = scop.c \
+			init.c \
 			error_handling.c \
 			reader.c \
-			utils.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
