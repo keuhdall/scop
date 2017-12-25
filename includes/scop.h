@@ -24,8 +24,10 @@
 
 enum					e_var_type
 {
-						VEC2,
-						VEC3
+						V,
+						VT,
+						VN,
+						F
 };
 
 typedef struct			s_vec2
