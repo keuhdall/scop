@@ -37,7 +37,8 @@ void	init_glew(void)
 
 void	init_window(t_scop *s)
 {
-	s-> win = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
+	s-> win = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Hello Triangle",
+	NULL, NULL);
 	if (!s->win) {
 		fprintf(stderr, "ERROR: could not open window with GLFW3\n");
 		glfwTerminate();

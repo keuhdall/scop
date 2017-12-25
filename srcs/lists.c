@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader.c                                           :+:      :+:    :+:   */
+/*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,44 +12,30 @@
 
 #include "../includes/scop.h"
 
-void	parse_v(FILE *file, t_scop *s)
+t_scop_list	*new_scop_lst(int id, void *content)
 {
-	t_vec3	vert;
+	t_scop_list	*tmp;
 
-	fscanf(file, "%f %f %f\n", &vert.x, &vert.y, &vert.z);
-	push_scop_lst(&s->tmp_list, new_scop_lst(VEC3, &vert));
-	//MIGHT CHANGE
+	if (!(tmp = (t_scop_list *)malloc(sizeof(t_scop_list))))
+		return (NULL);
+	tmp->id = id;
+	tmp->content = content;
+	tmp->next = NULL;
+	return (tmp);
 }
 
-void	parse_vt(FILE *file, t_scop *s)
+void		push_scop_lst(t_scop_list **list, t_scop_list *new)
 {
-	t_vec2	uv;
+	t_scop_list	*tmp;
 
-	fscanf(file, "%f %f\n", &uv.x, &uv.y);
-	push_scop_lst(&s->tmp_list, new_scop_lst(VEC2, &uv));
-	//MIGHT CHANGE
-}
-
-void	reader_obj(char *name, t_scop *s)
-{
-	FILE *file;
-	char	line[LINE_SIZE];
-	int		res;
-
-	file = fopen(name, "r");
-	if (!file)
+	tmp = NULL;
+	tmp = *list;
+	if (!tmp)
+		*list = new;
+	else
 	{
-		fprintf(stderr, "Failed to open the given model file");
-		exit(1);
-	}
-	while (1)
-	{
-		res = fscanf(file, "%s", line);
-		if (res == EOF)
-			break ;
-		if (!strcmp(line, "v"))
-			parse_v(file, s);
-		else if (!strcmp(line, "vt"))
-			parse_vt(file, s);
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
 }

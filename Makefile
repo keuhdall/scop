@@ -29,6 +29,7 @@ SRC_NAME = scop.c \
 			init.c \
 			error_handling.c \
 			reader.c \
+			lists.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
