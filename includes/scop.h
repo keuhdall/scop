@@ -60,3 +60,6 @@ void					check_fd(int fd);
 void					init(t_scop *s);
 t_scop_list				*new_scop_lst(int id, void *content);
 void					push_scop_lst(t_scop_list **list, t_scop_list *new);
+void					parse_v(FILE *file, t_scop *s);
+void					parse_vt(FILE *file, t_scop *s);
+void					parse_vn(FILE *file, t_scop *s);

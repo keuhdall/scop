@@ -12,33 +12,6 @@
 
 #include "../includes/scop.h"
 
-void	parse_v(FILE *file, t_scop *s)
-{
-	t_vec3	vert;
-
-	fscanf(file, "%f %f %f\n", &vert.x, &vert.y, &vert.z);
-	push_scop_lst(&s->tmp_list, new_scop_lst(V, &vert));
-	//MIGHT CHANGE
-}
-
-void	parse_vt(FILE *file, t_scop *s)
-{
-	t_vec2	uv;
-
-	fscanf(file, "%f %f\n", &uv.x, &uv.y);
-	push_scop_lst(&s->tmp_list, new_scop_lst(VT, &uv));
-	//MIGHT CHANGE
-}
-
-void	parse_vn(FILE *file, t_scop *s)
-{
-	t_vec3	nl;
-
-	fscanf(file, "%f %f %f\n", &nl.x, &nl.y, &nl.z);
-	push_scop_lst(&s->tmp_list, new_scop_lst(VN, &nl));
-	//MIGHT CHANGE
-}
-
 void	reader_obj(char *name, t_scop *s)
 {
 	FILE *file;
