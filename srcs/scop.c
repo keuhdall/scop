@@ -12,13 +12,30 @@
 
 #include "../includes/scop.h"
 
+void	print_list(t_scop *s)
+{
+	t_list	*tmp;
+	t_vec3	tmp_vec3;
+
+	tmp = s->tmp_list;
+	while (tmp)
+	{
+		if (tmp->content_size == sizeof(t_vec3))
+		{
+			tmp_vec3 = *(t_vec3*)tmp->content;
+			printf("VEC3 : %f ; %f ; %f\n", tmp_vec3.x, tmp_vec3.y, tmp_vec3.z);
+		}
+		tmp = tmp->next;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_scop	s;
 
-	if (!argc)
-		ft_putendl(argv[0]);
 	init(&s);
+	if (argc > 1)
+		read_file(argv[1], &s);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
