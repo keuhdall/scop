@@ -14,35 +14,66 @@
 #include "../includes/scop.h"
 
 
-void	parse_v(FILE *file, t_scop *s)
+void	parse_v(char *line, t_scop *s)
 {
+	int		count;
+	char	**a;
 	t_vec3	vert;
 
-	fscanf(file, "%f %f %f\n", &vert.x, &vert.y, &vert.z);
-	push_scop_lst(&s->tmp_list, new_scop_lst(V, &vert));
+	count = -1;
+	a = ft_strsplit(line, ' ');
+	if (count_array(a) != 4)
+	{
+		dprintf(2, "Error : bad format in given file\n");
+		exit(1);
+	}
+	vert.x = atof(a[1]);
+	vert.y = atof(a[2]);
+	vert.z = atof(a[3]);
+	ft_lst_push_back(&s->tmp_list, ft_lstnew(&vert, sizeof(vert)));
+	free_array(a);
 	//MIGHT CHANGE
 }
 
 
-void	parse_vt(FILE *file, t_scop *s)
+void	parse_vt(char *line, t_scop *s)
 {
+	char	**a;
 	t_vec2	uv;
 
-	fscanf(file, "%f %f\n", &uv.x, &uv.y);
-	push_scop_lst(&s->tmp_list, new_scop_lst(VT, &uv));
+	a = ft_strsplit(line, ' ');
+	if (count_array(a) != 3)
+	{
+		dprintf(2, "Error : bad format in given file\n");
+		exit(1);
+	}
+	uv.x = atof(a[1]);
+	uv.y = atof(a[2]);
+	ft_lst_push_back(&s->tmp_list, ft_lstnew(&uv, sizeof(uv)));
+	free_array(a);
 	//MIGHT CHANGE
 }
 
-void	parse_vn(FILE *file, t_scop *s)
+void	parse_vn(char *line, t_scop *s)
 {
+	char	**a;
 	t_vec3	nl;
 
-	fscanf(file, "%f %f %f\n", &nl.x, &nl.y, &nl.z);
-	push_scop_lst(&s->tmp_list, new_scop_lst(VN, &nl));
+	a = ft_strsplit(line, ' ');
+	if (count_array(a) != 4)
+	{
+		dprintf(2, "Error : bad format in given file\n");
+		exit(1);
+	}
+	nl.x = atof(a[1]);
+	nl.y = atof(a[2]);
+	nl.z = atof(a[3]);
+	ft_lst_push_back(&s->tmp_list, ft_lstnew(&nl, sizeof(nl)));
+	free_array(a);
 	//MIGHT CHANGE
 }
-
-void	parse_n(FILE *file, t_scop *s)
+/*
+void	parse_n(char *line, t_scop *s)
 {
 	t_vec3	v[3];
 	int		ret;
@@ -58,3 +89,4 @@ void	parse_n(FILE *file, t_scop *s)
 	push_scop_lst(&s->tmp_list, new_scop_lst(F, &v));
 	//MIGHT CHANGE
 }
+*/

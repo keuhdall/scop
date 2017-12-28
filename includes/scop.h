@@ -43,23 +43,22 @@ typedef struct			s_vec3
 	float				z;
 }						t_vec3;
 
-typedef struct			s_scop_list
-{
-	int					id;
-	void				*content;
-	struct s_scop_list	*next;
-}						t_scop_list;
-
 typedef struct			s_scop
 {
-	t_scop_list			*tmp_list;
+	t_list				*tmp_list;
 	GLFWwindow			*win;
 }						t_scop;
 
+
+
+int						count_array(char **a);
+void					free_array(char **a);
+
 void					check_fd(int fd);
+void					read_file(char *name, t_scop *s);
+
 void					init(t_scop *s);
-t_scop_list				*new_scop_lst(int id, void *content);
-void					push_scop_lst(t_scop_list **list, t_scop_list *new);
-void					parse_v(FILE *file, t_scop *s);
-void					parse_vt(FILE *file, t_scop *s);
-void					parse_vn(FILE *file, t_scop *s);
+
+void					parse_v(char *line, t_scop *s);
+void					parse_vt(char *line, t_scop *s);
+void					parse_vn(char *line, t_scop *s);

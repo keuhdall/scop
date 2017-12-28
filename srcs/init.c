@@ -49,6 +49,7 @@ void	init_window(t_scop *s)
 
 void	init(t_scop *s)
 {
+	ft_bzero(s, sizeof(s));
 	init_glfw();
 	init_window(s);
 	init_glew();
