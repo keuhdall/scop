@@ -23,9 +23,9 @@ void	read_file(char *name, t_scop *s)
 	{
 		if (!strncmp(line, "v", 1))
 			parse_v(line, s);
-		else if (!strcmp(line, "vt"))
+		else if (!strncmp(line, "vt", 2))
 			parse_vt(line, s);
-		else if (!strcmp(line, "vn"))
+		else if (!strncmp(line, "vn", 2))
 			parse_vn(line, s);
 		free(line);
 	}

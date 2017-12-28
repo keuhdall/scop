@@ -15,6 +15,7 @@
 void	print_list(t_scop *s)
 {
 	t_list	*tmp;
+	t_vec2	tmp_vec2;
 	t_vec3	tmp_vec3;
 
 	tmp = s->tmp_list;
@@ -24,6 +25,11 @@ void	print_list(t_scop *s)
 		{
 			tmp_vec3 = *(t_vec3*)tmp->content;
 			printf("VEC3 : %f ; %f ; %f\n", tmp_vec3.x, tmp_vec3.y, tmp_vec3.z);
+		}
+		else if (tmp->content_size == sizeof(t_vec2))
+		{
+			tmp_vec2 = *(t_vec2*)tmp->content;
+			printf("VEC2 : %f ; %f\n", tmp_vec2.x, tmp_vec2.y);
 		}
 		tmp = tmp->next;
 	}
@@ -36,6 +42,7 @@ int	main(int argc, char *argv[])
 	init(&s);
 	if (argc > 1)
 		read_file(argv[1], &s);
+	print_list(&s);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
