@@ -12,28 +12,22 @@
 
 #include "../includes/scop.h"
 
-void	reader_obj(char *name, t_scop *s)
+void	read_file(char *name, t_scop *s)
 {
-	FILE *file;
-	char	line[LINE_SIZE];
-	int		res;
+	int		fd;
+	int		ret;
+	char	*line;
 
-	file = fopen(name, "r");
-	if (!file)
+	check_fd(fd = open(name, O_RDONLY));
+	while ((ret = get_next_line(fd, &line)))
 	{
-		fprintf(stderr, "Failed to open the given model file");
-		exit(1);
-	}
-	while (1)
-	{
-		res = fscanf(file, "%s", line);
-		if (res == EOF)
-			break ;
-		if (!strcmp(line, "v"))
-			parse_v(file, s);
+		if (!strncmp(line, "v", 1))
+			parse_v(line, s);
 		else if (!strcmp(line, "vt"))
-			parse_vt(file, s);
+			parse_vt(line, s);
 		else if (!strcmp(line, "vn"))
-			parse_vn(file, s);
+			parse_vn(line, s);
+		free(line);
 	}
+	free(line);
 }
