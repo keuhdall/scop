@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/27 20:16:42 by lmarques          #+#    #+#             */
-/*   Updated: 2017/11/12 18:52:37 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/11/04 10:35:49 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,15 @@ char		*ft_strtrim(char const *s)
 	str = NULL;
 	str = ft_strnew((int)ft_strlen(s) == ft_nchar(s) ? 1 : (int)ft_strlen(s) -
 			ft_nchar(s) - ft_rnchar(s) + 1);
-	if (!str)
-		return (NULL);
-	while (count_s < ((int)ft_strlen(s) - ft_rnchar(s)))
+	if (str)
 	{
-		str[count_str] = s[count_s];
-		count_s++;
-		count_str++;
+		while (count_s < ((int)ft_strlen(s) - ft_rnchar(s)))
+		{
+			str[count_str] = s[count_s];
+			count_s++;
+			count_str++;
+		}
+		str[count_str] = '\0';
 	}
-	str[count_str] = '\0';
 	return (str);
 }
