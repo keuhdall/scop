@@ -17,13 +17,15 @@ INC_PATH=./includes
 OBJ_PATH=./objs
 LIBFT_PATH=./libft
 
-GLFW_INC_PATH=/usr/local/Cellar/glfw/3.2.1/include/
-GLEW_INC_PATH=/usr/local/Cellar/glew/2.1.0/include/
-GLFW_LIB_PATH=/usr/local/Cellar/glfw/3.2.1/lib/
-GLEW_LIB_PATH=/usr/local/Cellar/glew/2.1.0/lib/
+#GLEW_INC_PATH=/usr/local/Cellar/glew/2.1.0/include/
+#GLEW_LIB_PATH=/usr/local/Cellar/glew/2.1.0/lib/
+#GLFW_INC_PATH=/usr/local/Cellar/glfw/3.2.1/include/
+#GLFW_LIB_PATH=/usr/local/Cellar/glfw/3.2.1/lib/
 
-#GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
-#GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
+GLEW_INC_PATH=/Users/lmarques/.brew/Cellar/glew/2.1.0/include/
+GLEW_LIB_PATH=/Users/lmarques/.brew/Cellar/glew/2.1.0/lib/
+GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
+GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 
 SRC_NAME = scop.c \
 			init.c \
