@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2017/12/17 18:17:33 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/07 17:15:42 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct			s_scop
 
 
 
-int						count_array(char **a);
+int						get_array_size(char **a);
 void					free_array(char **a);
 
 void					check_fd(int fd);

@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,12 +6,11 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2017/12/17 18:17:51 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/07 17:20:14 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scop.h"
-
 
 void	parse_v(char *line, t_scop *s)
 {
@@ -22,7 +20,7 @@ void	parse_v(char *line, t_scop *s)
 
 	count = -1;
 	a = ft_strsplit(line, ' ');
-	if (count_array(a) != 4)
+	if (get_array_size(a) != 4)
 	{
 		dprintf(2, "Error : bad format in given file\n");
 		exit(1);
@@ -35,14 +33,13 @@ void	parse_v(char *line, t_scop *s)
 	//MIGHT CHANGE
 }
 
-
 void	parse_vt(char *line, t_scop *s)
 {
 	char	**a;
 	t_vec2	uv;
 
 	a = ft_strsplit(line, ' ');
-	if (count_array(a) != 3)
+	if (get_array_size(a) != 3)
 	{
 		dprintf(2, "Error : bad format in given file\n");
 		exit(1);
@@ -60,7 +57,7 @@ void	parse_vn(char *line, t_scop *s)
 	t_vec3	nl;
 
 	a = ft_strsplit(line, ' ');
-	if (count_array(a) != 4)
+	if (get_array_size(a) != 4)
 	{
 		dprintf(2, "Error : bad format in given file\n");
 		exit(1);

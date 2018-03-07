@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2017/12/17 18:17:51 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/07 17:19:28 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ void	init_glew(void)
 
 void	init_window(t_scop *s)
 {
-	s-> win = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Hello Triangle",
-	NULL, NULL);
-	if (!s->win) {
+	s->win = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Hello Triangle",
+			NULL, NULL);
+	if (!s->win)
+	{
 		fprintf(stderr, "ERROR: could not open window with GLFW3\n");
 		glfwTerminate();
 		exit(1);

@@ -6,13 +6,13 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2017/12/17 18:17:51 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/07 17:19:49 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scop.h"
 
-int		count_array(char **a)
+int		get_array_size(char **a)
 {
 	int	count;
 
@@ -22,7 +22,7 @@ int		count_array(char **a)
 	return (count);
 }
 
-void	free_array(char	**a)
+void	free_array(char **a)
 {
 	int	count;
 

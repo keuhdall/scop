@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2017/12/17 18:17:51 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/07 17:16:17 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	print_list(t_scop *s)
 
 int	main(int argc, char *argv[])
 {
-	t_scop	s;
+	t_scop	sc;
 
-	init(&s);
+	init(&sc);
 	if (argc > 1)
-		read_file(argv[1], &s);
-	print_list(&s);
+		read_file(argv[1], &sc);
+	print_list(&sc);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
@@ -94,14 +94,14 @@ int	main(int argc, char *argv[])
 	glAttachShader(shader_programme, vs);
 	glLinkProgram(shader_programme);
 
-	while (!glfwWindowShouldClose(s.win))
+	while (!glfwWindowShouldClose(sc.win))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(shader_programme);
 		glBindVertexArrayAPPLE(vao);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glfwPollEvents();
-		glfwSwapBuffers(s.win);
+		glfwSwapBuffers(sc.win);
 	}
 	glfwTerminate();
 	return (0);
