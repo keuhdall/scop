@@ -6,7 +6,7 @@
 #*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/19 05:25:46 by lmarques          #+#    #+#             *#
-#*   Updated: 2017/11/20 01:28:29 by lmarques         ###   ########.fr       *#
+#*   Updated: 2018/03/08 07:48:30 by lmarques         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -17,15 +17,15 @@ INC_PATH=./includes
 OBJ_PATH=./objs
 LIBFT_PATH=./libft
 
-#GLEW_INC_PATH=/usr/local/Cellar/glew/2.1.0/include/
-#GLEW_LIB_PATH=/usr/local/Cellar/glew/2.1.0/lib/
-#GLFW_INC_PATH=/usr/local/Cellar/glfw/3.2.1/include/
-#GLFW_LIB_PATH=/usr/local/Cellar/glfw/3.2.1/lib/
+GLEW_INC_PATH=/usr/local/Cellar/glew/2.1.0/include/
+GLEW_LIB_PATH=/usr/local/Cellar/glew/2.1.0/lib/
+GLFW_INC_PATH=/usr/local/Cellar/glfw/3.2.1/include/
+GLFW_LIB_PATH=/usr/local/Cellar/glfw/3.2.1/lib/
 
-GLEW_INC_PATH=/Users/lmarques/.brew/Cellar/glew/2.1.0/include/
-GLEW_LIB_PATH=/Users/lmarques/.brew/Cellar/glew/2.1.0/lib/
-GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
-GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
+#GLEW_INC_PATH=/Users/lmarques/.brew/Cellar/glew/2.1.0/include/
+#GLEW_LIB_PATH=/Users/lmarques/.brew/Cellar/glew/2.1.0/lib/
+#GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
+#GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 
 SRC_NAME = scop.c \
 			init.c \

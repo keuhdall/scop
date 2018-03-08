@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/07 17:19:28 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/08 07:56:17 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	init_glfw(void)
 {
 	if (!glfwInit())
-	{
-		fprintf(stderr, "Failed to initialize GLFW\n");
-		exit(1);
-	}
+		puterr(ERR_INIT_GLFW);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -29,10 +26,7 @@ void	init_glew(void)
 {
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
-	{
-		fprintf(stderr, "Failed to initialize GLEW\n");
-		exit(1);
-	}
+		puterr(ERR_INIT_GLEW);
 }
 
 void	init_window(t_scop *s)
@@ -40,11 +34,7 @@ void	init_window(t_scop *s)
 	s->win = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Hello Triangle",
 			NULL, NULL);
 	if (!s->win)
-	{
-		fprintf(stderr, "ERROR: could not open window with GLFW3\n");
-		glfwTerminate();
-		exit(1);
-	}
+		puterr(ERR_OPEN_WIN);
 	glfwMakeContextCurrent(s->win);
 }
 
