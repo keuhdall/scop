@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/07 17:16:17 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/10 02:30:53 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,32 @@
 void	print_list(t_scop *s)
 {
 	t_list	*tmp;
-	t_vec2	tmp_vec2;
+	t_obj	*tmp_obj;
 	t_vec3	tmp_vec3;
+	t_vec4	tmp_vec4;
 
 	tmp = s->tmp_list;
 	while (tmp)
 	{
-		if (tmp->content_size == sizeof(t_vec3))
+		tmp_obj = tmp->content;
+		if (((t_obj *)tmp->content)->type == V)
 		{
-			tmp_vec3 = *(t_vec3*)tmp->content;
-			printf("VEC3 : %f ; %f ; %f\n", tmp_vec3.x, tmp_vec3.y, tmp_vec3.z);
+			tmp_vec3 = *(t_vec3 *)((t_obj *)tmp->content)->content;
+			printf("V : %f ; %f ; %f\n", tmp_vec3.x, tmp_vec3.y, tmp_vec3.z);
 		}
-		else if (tmp->content_size == sizeof(t_vec2))
+		else if (((t_obj *)tmp->content)->type == F)
 		{
-			tmp_vec2 = *(t_vec2*)tmp->content;
-			printf("VEC2 : %f ; %f\n", tmp_vec2.x, tmp_vec2.y);
+			if (sizeof(tmp->content) == sizeof(t_vec3))
+			{
+				tmp_vec3 = *(t_vec3 *)((t_obj *)tmp->content)->content;
+				printf("F : %f ; %f ; %f\n", tmp_vec3.x, tmp_vec3.y, tmp_vec3.z);
+			}
+			else
+			{
+				tmp_vec4 = *(t_vec4 *)((t_obj *)tmp->content)->content;
+				printf("F : %f ; %f ; %f ; %f\n", tmp_vec4.x, tmp_vec4.y, tmp_vec4.z, tmp_vec4.w);
+			}
 		}
-		tmp = tmp->next;
 	}
 }
 
@@ -43,6 +52,7 @@ int	main(int argc, char *argv[])
 	if (argc > 1)
 		read_file(argv[1], &sc);
 	print_list(&sc);
+	//return (0);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
