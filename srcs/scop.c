@@ -6,41 +6,33 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/10 02:30:53 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 04:09:29 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scop.h"
 
-void	print_list(t_scop *s)
+void	read_array(t_scop *sc)
 {
-	t_list	*tmp;
-	t_obj	*tmp_obj;
-	t_vec3	tmp_vec3;
-	t_vec4	tmp_vec4;
+	int		count;
+	void	*tmp;
 
-	tmp = s->tmp_list;
-	while (tmp)
+	count = -1;
+	while (++count < sc->v_size)
 	{
-		tmp_obj = tmp->content;
-		if (((t_obj *)tmp->content)->type == V)
-		{
-			tmp_vec3 = *(t_vec3 *)((t_obj *)tmp->content)->content;
-			printf("V : %f ; %f ; %f\n", tmp_vec3.x, tmp_vec3.y, tmp_vec3.z);
-		}
-		else if (((t_obj *)tmp->content)->type == F)
-		{
-			if (sizeof(tmp->content) == sizeof(t_vec3))
-			{
-				tmp_vec3 = *(t_vec3 *)((t_obj *)tmp->content)->content;
-				printf("F : %f ; %f ; %f\n", tmp_vec3.x, tmp_vec3.y, tmp_vec3.z);
-			}
-			else
-			{
-				tmp_vec4 = *(t_vec4 *)((t_obj *)tmp->content)->content;
-				printf("F : %f ; %f ; %f ; %f\n", tmp_vec4.x, tmp_vec4.y, tmp_vec4.z, tmp_vec4.w);
-			}
-		}
+		tmp = sc->v_array[count];
+		printf("v : %f ; %f ; %f\n", ((t_vec3 *)tmp)->x, ((t_vec3 *)tmp)->y, ((t_vec3 *)tmp)->z);
+	}
+	count = -1;
+	while (++count < sc->f_size)
+	{
+		tmp = sc->f_array[count];
+		if (sizeof(sc->f_array[count]) == sizeof(t_vec3))
+			printf("f : %f ; %f ; %f\n", ((t_vec3 *)tmp)->x, ((t_vec3 *)tmp)->y, ((t_vec3 *)tmp)->z);
+		else if (sizeof(sc->f_array[count]) == sizeof(t_vec4))
+			printf("f : %f ; %f ; %f ; %f\n", ((t_vec4 *)tmp)->x, ((t_vec4 *)tmp)->y, ((t_vec4 *)tmp)->z, ((t_vec4 *)tmp)->w);
+		else
+			printf("t_vec3 : %lu ; t_vec4 : %lu ; moi : %lu moi deref : %lu\n", sizeof(t_vec3), sizeof(t_vec4), sizeof(sc->f_array[count]), sizeof(*(sc->f_array[count])));
 	}
 }
 
@@ -48,11 +40,12 @@ int	main(int argc, char *argv[])
 {
 	t_scop	sc;
 
-	init(&sc);
+	//init(&sc);
+	ft_bzero(&sc, sizeof(sc));
 	if (argc > 1)
 		read_file(argv[1], &sc);
-	print_list(&sc);
-	//return (0);
+	read_array(&sc);
+	return (0);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);

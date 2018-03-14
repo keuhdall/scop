@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/08 08:00:58 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 03:41:57 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,7 @@ void	puterr(int err)
 		dprintf(2, "Error : could not open window\n");
 	else if (err == ERR_BAD_FORMAT)
 		dprintf(2, "Error : bad format in given file\n");
+	else if (err == ERR_MALLOC_FAILED)
+		dprintf(2, "Error : an occured while allocating memory, exiting.\n");
 	exit(1);
-}
-
-t_obj	*create_obj(int type, void *content)
-{
-	t_obj	*obj;
-
-	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
-		return (NULL);
-	obj->type = type;
-	if (!(obj->content = (void *)malloc(sizeof(content))))
-		return (NULL);
-	obj->content = content;
-	return (obj);
 }

@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 23:35:12 by lmarques          #+#    #+#             */
-/*   Updated: 2016/11/30 15:37:15 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 02:28:11 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
-char				*ft_realloc(char *str, int size);
+void				*ft_realloc(void *ptr, int size);
 int					ft_sqrt(int nb);
 char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strchr(const char *s, int c);

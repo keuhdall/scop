@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/08 07:58:44 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 03:42:39 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,8 @@ enum					e_errors
 						ERR_INIT_GLFW,
 						ERR_INIT_GLEW,
 						ERR_OPEN_WIN,
-						ERR_BAD_FORMAT
-};
-
-enum					e_var_type
-{
-						V,
-						F
+						ERR_BAD_FORMAT,
+						ERR_MALLOC_FAILED
 };
 
 typedef struct			s_vec2
@@ -57,15 +52,12 @@ typedef struct			s_vec4
 	float				w;
 }						t_vec4;
 
-typedef struct			s_obj
-{
-	int					type;
-	void				*content;
-}						t_obj;
-
 typedef struct			s_scop
 {
-	t_list				*tmp_list;
+	int					v_size;
+	int					f_size;
+	void				**v_array;
+	void				**f_array;
 	GLFWwindow			*win;
 }						t_scop;
 
@@ -74,7 +66,6 @@ typedef struct			s_scop
 int						get_array_size(char **a);
 void					free_array(char **a);
 void					puterr(int err);
-t_obj					*create_obj(int type, void *content);
 
 void					check_fd(int fd);
 void					read_file(char *name, t_scop *s);
