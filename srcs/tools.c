@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 03:41:57 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:15:10 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void	puterr(int err)
 		dprintf(2, "Error : bad format in given file\n");
 	else if (err == ERR_MALLOC_FAILED)
 		dprintf(2, "Error : an occured while allocating memory, exiting.\n");
+	else if (err == ERR_OPEN_FILE)
+		dprintf(2, "Error : could not open the file\n");
 	exit(1);
 }

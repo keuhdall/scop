@@ -6,46 +6,20 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 04:09:29 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:58:38 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scop.h"
 
-void	read_array(t_scop *sc)
-{
-	int		count;
-	void	*tmp;
-
-	count = -1;
-	while (++count < sc->v_size)
-	{
-		tmp = sc->v_array[count];
-		printf("v : %f ; %f ; %f\n", ((t_vec3 *)tmp)->x, ((t_vec3 *)tmp)->y, ((t_vec3 *)tmp)->z);
-	}
-	count = -1;
-	while (++count < sc->f_size)
-	{
-		tmp = sc->f_array[count];
-		if (sizeof(sc->f_array[count]) == sizeof(t_vec3))
-			printf("f : %f ; %f ; %f\n", ((t_vec3 *)tmp)->x, ((t_vec3 *)tmp)->y, ((t_vec3 *)tmp)->z);
-		else if (sizeof(sc->f_array[count]) == sizeof(t_vec4))
-			printf("f : %f ; %f ; %f ; %f\n", ((t_vec4 *)tmp)->x, ((t_vec4 *)tmp)->y, ((t_vec4 *)tmp)->z, ((t_vec4 *)tmp)->w);
-		else
-			printf("t_vec3 : %lu ; t_vec4 : %lu ; moi : %lu moi deref : %lu\n", sizeof(t_vec3), sizeof(t_vec4), sizeof(sc->f_array[count]), sizeof(*(sc->f_array[count])));
-	}
-}
-
 int	main(int argc, char *argv[])
 {
 	t_scop	sc;
 
-	//init(&sc);
-	ft_bzero(&sc, sizeof(sc));
-	if (argc > 1)
-		read_file(argv[1], &sc);
-	read_array(&sc);
-	return (0);
+	init(&sc);
+	//if (argc > 1)
+	//	read_file(argv[1], &sc);
+	if (argc) (void)argv;
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);

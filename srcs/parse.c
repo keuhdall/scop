@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 03:56:38 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:16:10 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,61 +15,88 @@
 void	parse_v(char *line, t_scop *sc)
 {
 	char	**a;
-	t_vec3	*vert;
+	t_vec3	v3;
 
-	if (!(vert = (t_vec3 *)malloc(sizeof(t_vec3))))
-		puterr(ERR_MALLOC_FAILED);
 	a = ft_strsplit(line, ' ');
 	if (get_array_size(a) != 4)
 		puterr(ERR_BAD_FORMAT);
-	vert->x = atof(a[1]);
-	vert->y = atof(a[2]);
-	vert->z = atof(a[3]);
+	v3.x = atof(a[1]);
+	v3.y = atof(a[2]);
+	v3.z = atof(a[3]);
+	free_array(a);
 	sc->v_size++;
 	sc->v_array = ft_realloc(sc->v_array, sizeof(t_vec3) * sc->v_size);
-	sc->v_array[sc->v_size - 1] = vert;
+	sc->v_array[sc->v_size - 1] = v3;
 }
 
-int		get_f_array_size(t_scop *sc)
+void	parse_vt(char *line, t_scop *sc)
 {
-	int	count;
-	int	size;
+	char	**a;
+	t_vec2	v2;
+
+	a = ft_strsplit(line, ' ');
+	if (get_array_size(a) != 3)
+		puterr(ERR_BAD_FORMAT);
+	v2.x = atof(a[1]);
+	v2.y = atof(a[2]);
+	free_array(a);
+	sc->vt_size++;
+	sc->vt_array = ft_realloc(sc->vt_array, sizeof(t_vec2) * sc->vt_size);
+	sc->vt_array[sc->vt_size - 1] = v2;
+}
+
+void	parse_vn(char *line, t_scop *sc)
+{
+	char	**a;
+	t_vec3	v3;
+
+	a = ft_strsplit(line, ' ');
+	if (get_array_size(a) != 4)
+		puterr(ERR_BAD_FORMAT);
+	v3.x = atof(a[1]);
+	v3.y = atof(a[2]);
+	v3.z = atof(a[3]);
+	free_array(a);
+	sc->vn_size++;
+	sc->vn_array = ft_realloc(sc->vn_array, sizeof(t_vec3) * sc->vn_size);
+	sc->vn_array[sc->vn_size - 1] = v3;
+}
+
+void	fill_f(char *s, t_face *f, t_scop *sc)
+{
+	int		count;
+	char	**a;
 
 	count = -1;
-	size = 0;
-	while (++count < sc->f_size)
-		size += sizeof(sc->f_array[count]);
-	return (size);
+	a = ft_strsplit(s, '/');
+	if (get_array_size(a) < 3 || atoi(a[0]) >= sc->v_size)
+		puterr(ERR_BAD_FORMAT);
+	f->v_size++;
+	f->vt_size++;
+	f->vn_size++;
+	f->v = ft_realloc(f->v, sizeof(int) * f->v_size);
+	f->vt = ft_realloc(f->vt, sizeof(int) * f->vt_size);
+	f->vn = ft_realloc(f->vn, sizeof(int) * f->vn_size);
+	f->v[f->v_size - 1] = atoi(a[0]);
+	f->vt[f->vt_size - 1] = atoi(a[1]);
+	f->vn[f->vn_size - 1] = atoi(a[2]);
+	free_array(a);
 }
 
 void	parse_f(char *line, t_scop *sc)
 {
+	int		count;
 	char	**a;
-	t_vec3	*v3;
-	t_vec4	*v4;
+	t_face	f;
 
+	count = 0;
 	a = ft_strsplit(line, ' ');
-	if (get_array_size(a) == 4)
-	{
-		if (!(v3 = (t_vec3 *)malloc(sizeof(t_vec3))))
-			puterr(ERR_MALLOC_FAILED);
-		v3->x = atof(a[1]);
-		v3->y = atof(a[2]);
-		v3->z = atof(a[3]);
-		sc->f_array = ft_realloc(sc->f_array, get_f_array_size(sc) + sizeof(t_vec3));
-		sc->f_array[sc->f_size++] = v3;
-	}
-	else if (get_array_size(a) == 5)
-	{
-		if (!(v4 = (t_vec4 *)malloc(sizeof(t_vec4))))
-			puterr(ERR_MALLOC_FAILED);
-		v4->x = atof(a[1]);
-		v4->y = atof(a[2]);
-		v4->z = atof(a[3]);
-		v4->w = atof(a[4]);
-		sc->f_array = ft_realloc(sc->f_array, get_f_array_size(sc) + sizeof(t_vec4));
-		sc->f_array[sc->f_size++] = v4;
-	}
-	else
+	ft_bzero(&f, sizeof(f));
+	if (get_array_size(a) < 4)
 		puterr(ERR_BAD_FORMAT);
+	while (a[++count])
+		fill_f(a[count], &f, sc);
+	free_array(a);
+	sc->f_size++;
+	sc->f_array = ft_realloc(sc->f_array, sizeof(t_face) * sc->f_size);
 }
