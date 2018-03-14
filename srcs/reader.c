@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 16:59:08 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 17:30:41 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ void	read_file(char *name, t_scop *sc)
 	char	*line;
 
 	fd = open(name, O_RDONLY);
-	if (fd < 0)
-		puterr(ERR_OPEN_FILE);
+	perror("open");
 	while ((ret = get_next_line(fd, &line)))
 	{
+		if (ret == -1)
+			puterr(ERR_OPEN_FILE);
 		get_line_type(line, sc);
 		free(line);
 	}

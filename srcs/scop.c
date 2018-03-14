@@ -6,20 +6,35 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 16:58:38 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/14 17:44:46 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scop.h"
+
+void	read_arrays(t_scop *sc)
+{
+	int	count;
+
+	count = -1;
+	while (++count < sc->v_size)
+		printf("v : %f ; %f ; %f\n", sc->v_array[count].x, sc->v_array[count].y, sc->v_array[count].z);
+	count = -1;
+	while (++count < sc->vt_size)
+		printf("vt : %f ; %f\n", sc->vt_array[count].x, sc->vt_array[count].y);
+	count = -1;
+	while (++count < sc->vn_size)
+		printf("vn : %f ; %f ; %f\n", sc->vn_array[count].x, sc->vn_array[count].y, sc->vn_array[count].z);
+}
 
 int	main(int argc, char *argv[])
 {
 	t_scop	sc;
 
 	init(&sc);
-	//if (argc > 1)
-	//	read_file(argv[1], &sc);
-	if (argc) (void)argv;
+	if (argc > 1)
+		read_file(argv[1], &sc);
+	//if (argc) (void)argv;
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
