@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/15 19:38:56 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/15 19:50:24 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ void	parse_v(char *line, t_scop *sc)
 
 	a = ft_strsplit(line, ' ');
 	if (get_array_size(a) != 4)
-	{
-		ft_putendl("1");
 		puterr(ERR_BAD_FORMAT);
-	}
 	v3.x = atof(a[1]);
 	v3.y = atof(a[2]);
 	v3.z = atof(a[3]);
@@ -39,10 +36,7 @@ void	parse_vt(char *line, t_scop *sc)
 
 	a = ft_strsplit(line, ' ');
 	if (get_array_size(a) != 3)
-	{
-		ft_putendl("2");
 		puterr(ERR_BAD_FORMAT);
-	}
 	v2.x = atof(a[1]);
 	v2.y = atof(a[2]);
 	free_array(a);
@@ -58,10 +52,7 @@ void	parse_vn(char *line, t_scop *sc)
 
 	a = ft_strsplit(line, ' ');
 	if (get_array_size(a) != 4)
-	{
-		ft_putendl("3");
 		puterr(ERR_BAD_FORMAT);
-	}
 	v3.x = atof(a[1]);
 	v3.y = atof(a[2]);
 	v3.z = atof(a[3]);
@@ -73,10 +64,8 @@ void	parse_vn(char *line, t_scop *sc)
 
 void	fill_f(char *s, t_face *f, t_scop *sc)
 {
-	int		count;
 	char	**a;
 
-	count = -1;
 	a = ft_strsplit(s, '/');
 	f->v_size++;
 	f->vt_size++;
@@ -97,10 +86,7 @@ void	fill_f(char *s, t_face *f, t_scop *sc)
 		f->vn[f->vn_size - 1] = atoi(a[2]);
 	}
 	else
-	{
-		ft_putendl("4");
 		puterr(ERR_BAD_FORMAT);
-	}
 	free_array(a);
 }
 
@@ -111,17 +97,14 @@ void	parse_f(char *line, t_scop *sc)
 	t_face	f;
 
 	count = 0;
-	printf("line  content : %s\n", line);
 	a = ft_strsplit(line, ' ');
 	ft_bzero(&f, sizeof(f));
 	if (get_array_size(a) < 4)
-	{
-		ft_putendl("5");
 		puterr(ERR_BAD_FORMAT);
-	}
 	while (a[++count])
 		fill_f(a[count], &f, sc);
 	free_array(a);
 	sc->f_size++;
 	sc->f_array = ft_realloc(sc->f_array, sizeof(t_face) * sc->f_size);
+	sc->f_array[sc->f_size - 1] = f;
 }
