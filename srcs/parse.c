@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 16:16:10 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/15 19:38:56 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	parse_v(char *line, t_scop *sc)
 
 	a = ft_strsplit(line, ' ');
 	if (get_array_size(a) != 4)
+	{
+		ft_putendl("1");
 		puterr(ERR_BAD_FORMAT);
+	}
 	v3.x = atof(a[1]);
 	v3.y = atof(a[2]);
 	v3.z = atof(a[3]);
@@ -36,7 +39,10 @@ void	parse_vt(char *line, t_scop *sc)
 
 	a = ft_strsplit(line, ' ');
 	if (get_array_size(a) != 3)
+	{
+		ft_putendl("2");
 		puterr(ERR_BAD_FORMAT);
+	}
 	v2.x = atof(a[1]);
 	v2.y = atof(a[2]);
 	free_array(a);
@@ -52,7 +58,10 @@ void	parse_vn(char *line, t_scop *sc)
 
 	a = ft_strsplit(line, ' ');
 	if (get_array_size(a) != 4)
+	{
+		ft_putendl("3");
 		puterr(ERR_BAD_FORMAT);
+	}
 	v3.x = atof(a[1]);
 	v3.y = atof(a[2]);
 	v3.z = atof(a[3]);
@@ -69,17 +78,29 @@ void	fill_f(char *s, t_face *f, t_scop *sc)
 
 	count = -1;
 	a = ft_strsplit(s, '/');
-	if (get_array_size(a) < 3 || atoi(a[0]) >= sc->v_size)
-		puterr(ERR_BAD_FORMAT);
 	f->v_size++;
 	f->vt_size++;
 	f->vn_size++;
 	f->v = ft_realloc(f->v, sizeof(int) * f->v_size);
 	f->vt = ft_realloc(f->vt, sizeof(int) * f->vt_size);
 	f->vn = ft_realloc(f->vn, sizeof(int) * f->vn_size);
-	f->v[f->v_size - 1] = atoi(a[0]);
-	f->vt[f->vt_size - 1] = atoi(a[1]);
-	f->vn[f->vn_size - 1] = atoi(a[2]);
+	if (!count_char(s, '/'))
+	{
+		f->v[f->v_size - 1] = atoi(s);
+		f->vt[f->vt_size - 1] = 0;
+		f->vn[f->vn_size - 1] = 0;
+	}
+	else if (get_array_size(a) >= 3 && atoi(a[0]) < sc->v_size)
+	{
+		f->v[f->v_size - 1] = atoi(a[0]);
+		f->vt[f->vt_size - 1] = atoi(a[1]);
+		f->vn[f->vn_size - 1] = atoi(a[2]);
+	}
+	else
+	{
+		ft_putendl("4");
+		puterr(ERR_BAD_FORMAT);
+	}
 	free_array(a);
 }
 
@@ -90,10 +111,14 @@ void	parse_f(char *line, t_scop *sc)
 	t_face	f;
 
 	count = 0;
+	printf("line  content : %s\n", line);
 	a = ft_strsplit(line, ' ');
 	ft_bzero(&f, sizeof(f));
 	if (get_array_size(a) < 4)
+	{
+		ft_putendl("5");
 		puterr(ERR_BAD_FORMAT);
+	}
 	while (a[++count])
 		fill_f(a[count], &f, sc);
 	free_array(a);

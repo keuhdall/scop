@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 16:15:10 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/15 19:25:22 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,22 @@ void	free_array(char **a)
 	a = NULL;
 }
 
-void	puterr(int err)
+int		count_char(char *s, const char c)
+{
+	int	count_s;
+	int	count_c;
+
+	count_s = -1;
+	count_c = 0;
+	while (s[++count_s])
+	{
+		if (s[count_s] == c)
+		count_c++;
+	}
+	return (count_c);
+}
+
+void	puterr(const int err)
 {
 	if (err == ERR_INIT_GLFW)
 		dprintf(2, "Error : failed to initialize GLFW\n");

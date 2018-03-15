@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 17:44:46 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/15 19:36:54 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ int	main(int argc, char *argv[])
 {
 	t_scop	sc;
 
-	init(&sc);
+	//init(&sc);
+	ft_bzero(&sc, sizeof(sc));
 	if (argc > 1)
 		read_file(argv[1], &sc);
+	while (1) continue ;
+	return (0);
 	//if (argc) (void)argv;
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
