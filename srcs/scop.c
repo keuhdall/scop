@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/15 19:51:00 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/16 12:19:54 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	read_arrays(t_scop *sc)
 {
 	int	count;
+	int	count_f;
 
 	count = -1;
 	while (++count < sc->v_size)
@@ -25,6 +26,19 @@ void	read_arrays(t_scop *sc)
 	count = -1;
 	while (++count < sc->vn_size)
 		printf("vn : %f ; %f ; %f\n", sc->vn_array[count].x, sc->vn_array[count].y, sc->vn_array[count].z);
+	count = -1;
+	while (++count < sc->f_size)
+	{
+		count_f = -1;
+		printf("f : ");
+		while (++count_f < sc->f_array[count].v_size)
+		{
+			printf("%d/%d/%d", sc->f_array[count].v[count_f], sc->f_array[count].vt[count_f], sc->f_array[count].vn[count_f]);
+			if (count_f < sc->f_array[count].v_size - 1)
+				printf(" ; ");
+		}
+		printf("\n");
+	}
 }
 
 int	main(int argc, char *argv[])
