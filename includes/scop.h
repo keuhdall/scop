@@ -6,30 +6,33 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/15 17:34:38 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/17 15:48:36 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <GL/glew.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLFW/glfw3.h>
-#include "../libft/libft.h"
-#include "../libft/get_next_line.h"
+#ifndef SCOP_H
+# define SCOP_H
 
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 600
-#define LINE_SIZE 1024
+# include <stdio.h>
+# include <GL/glew.h>
+# include <OpenGL/gl.h>
+# include <OpenGL/glu.h>
+# include <GLFW/glfw3.h>
+# include "../libft/libft.h"
+# include "../libft/get_next_line.h"
 
-enum					e_errors
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
+# define LINE_SIZE 1024
+
+enum	e_errors
 {
-						ERR_INIT_GLFW,
-						ERR_INIT_GLEW,
-						ERR_OPEN_WIN,
-						ERR_BAD_FORMAT,
-						ERR_MALLOC_FAILED,
-						ERR_OPEN_FILE
+	ERR_INIT_GLFW,
+	ERR_INIT_GLEW,
+	ERR_OPEN_WIN,
+	ERR_BAD_FORMAT,
+	ERR_MALLOC_FAILED,
+	ERR_OPEN_FILE
 };
 
 typedef struct			s_vec2
@@ -76,8 +79,6 @@ typedef struct			s_scop
 	GLFWwindow			*win;
 }						t_scop;
 
-
-
 int						get_array_size(char **a);
 int						count_char(char *s, const char c);
 void					free_array(char **a);
@@ -91,3 +92,5 @@ void					parse_v(char *line, t_scop *s);
 void					parse_vt(char *line, t_scop *s);
 void					parse_vn(char *line, t_scop *s);
 void					parse_f(char *line, t_scop *s);
+
+#endif
