@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/14 02:50:00 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/17 13:20:45 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	init_window(t_scop *s)
 
 void	init(t_scop *s)
 {
-	ft_bzero(s, sizeof(s));
 	init_glfw();
 	init_window(s);
 	init_glew();
