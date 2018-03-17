@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/15 19:25:22 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/17 15:45:46 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		count_char(char *s, const char c)
 	while (s[++count_s])
 	{
 		if (s[count_s] == c)
-		count_c++;
+			count_c++;
 	}
 	return (count_c);
 }
