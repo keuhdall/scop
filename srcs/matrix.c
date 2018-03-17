@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 16:02:22 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/17 17:51:00 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/17 18:16:40 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ t_vec4	*translate(t_vec4 v, t_vec3 pos)
 {
 	t_vec4	*m;
 
-	m = NULL;
-	ft_memalloc(sizeof(t_vec4) * 4);
+	m = ft_memalloc(sizeof(t_vec4) * 4);
 	m[0].x = 1;
 	m[0].w = pos.x;
 	m[1].y = 1;
