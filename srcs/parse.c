@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/15 19:50:24 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/17 13:22:08 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	parse_vn(char *line, t_scop *sc)
 	sc->vn_array[sc->vn_size - 1] = v3;
 }
 
-void	fill_f(char *s, t_face *f, t_scop *sc)
+void	fill_f(char *s, t_face *f)
 {
 	char	**a;
 
@@ -79,7 +79,7 @@ void	fill_f(char *s, t_face *f, t_scop *sc)
 		f->vt[f->vt_size - 1] = 0;
 		f->vn[f->vn_size - 1] = 0;
 	}
-	else if (get_array_size(a) >= 3 && atoi(a[0]) < sc->v_size)
+	else if (get_array_size(a) >= 3)
 	{
 		f->v[f->v_size - 1] = atoi(a[0]);
 		f->vt[f->vt_size - 1] = atoi(a[1]);
@@ -102,7 +102,7 @@ void	parse_f(char *line, t_scop *sc)
 	if (get_array_size(a) < 4)
 		puterr(ERR_BAD_FORMAT);
 	while (a[++count])
-		fill_f(a[count], &f, sc);
+		fill_f(a[count], &f);
 	free_array(a);
 	sc->f_size++;
 	sc->f_array = ft_realloc(sc->f_array, sizeof(t_face) * sc->f_size);
