@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 16:02:22 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/18 17:35:45 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/18 17:44:35 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,6 @@ t_vec4	scale(t_vec4 v, t_vec3 pos)
 	v.y *= pos.y;
 	v.z *= pos.z;
 	return (v);
-}
-
-float	dot(t_vec3 a, t_vec3 b)
-{
-	return (a.x * b.x + a.y * b.y + a.z * b.z);
-}
-
-
-t_vec3	normalize(t_vec3 v)
-{
-	float	len;
-	t_vec3	normalized;
-
-	len = sqrt(dot(v, v));
-	normalized = (quo3_c(v, len));
-	return (normalized);
 }
 
 t_vec4	*lookat(t_vec3 pos, t_vec3 target, t_vec3 upvec)

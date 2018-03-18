@@ -30,11 +30,12 @@ GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 SRC_NAME = scop.c \
 			init.c \
 			matrix.c \
-			matrix_op.c \
-			matrix_op_const.c \
 			reader.c \
 			parse.c \
 			tools.c \
+			vec_op.c \
+			vec_op2.c \
+			vec_op_const.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
