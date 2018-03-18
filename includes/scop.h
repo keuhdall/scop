@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/18 17:34:26 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/18 17:40:13 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ t_vec3					diff3(t_vec3 a, t_vec3 b);
 t_vec3					prod3(t_vec3 a, t_vec3 b);
 t_vec3					quo3(t_vec3 a, t_vec3 b);
 t_vec3					cross3(t_vec3 a, t_vec3 b);
+t_vec3					normalize(t_vec3 v);
+float					dot(t_vec3 a, t_vec3 b);
 
 int						get_array_size(char **a);
 int						count_char(char *s, const char c);
