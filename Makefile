@@ -30,6 +30,8 @@ GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 SRC_NAME = scop.c \
 			init.c \
 			matrix.c \
+			matrix_op.c \
+			matrix_op_const.c \
 			reader.c \
 			parse.c \
 			tools.c \

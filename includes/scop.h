@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/17 15:48:36 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/18 17:34:26 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SCOP_H
 
 # include <stdio.h>
+# include <math.h>
 # include <GL/glew.h>
 # include <OpenGL/gl.h>
 # include <OpenGL/glu.h>
@@ -78,6 +79,17 @@ typedef struct			s_scop
 	t_face				*f_array;
 	GLFWwindow			*win;
 }						t_scop;
+
+t_vec3					sum3_c(t_vec3 a, float b);
+t_vec3					diff3_c(t_vec3 a, float b);
+t_vec3					prod3_c(t_vec3 a, float b);
+t_vec3					quo3_c(t_vec3 a, float b);
+
+t_vec3					sum3(t_vec3 a, t_vec3 b);
+t_vec3					diff3(t_vec3 a, t_vec3 b);
+t_vec3					prod3(t_vec3 a, t_vec3 b);
+t_vec3					quo3(t_vec3 a, t_vec3 b);
+t_vec3					cross3(t_vec3 a, t_vec3 b);
 
 int						get_array_size(char **a);
 int						count_char(char *s, const char c);
