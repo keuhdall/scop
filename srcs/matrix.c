@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 16:02:22 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/18 17:44:35 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/18 18:07:39 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ t_vec4	*lookat(t_vec3 pos, t_vec3 target, t_vec3 upvec)
 	mat[2].z = -v[0].z;
 	mat[3].x = -(dot(v[2], pos));
 	mat[3].y = -(dot(v[1], pos));
-	mat[3].z =  dot(v[0], pos);
+	mat[3].z = dot(v[0], pos);
 	return (mat);
 }
