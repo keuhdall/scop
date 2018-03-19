@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/18 17:40:13 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/19 17:53:01 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,16 @@ typedef struct			s_scop
 	GLFWwindow			*win;
 }						t_scop;
 
+t_vec4					*new_matrix(void);
+t_vec4					*mat_sum(t_vec4 *a, t_vec4 *b);
+t_vec4					*mat_diff(t_vec4 *a, t_vec4 *b);
+t_vec4					*mat_prod(t_vec4 *a, t_vec4 *b);
+t_vec4					*mat_quo(t_vec4 *a, t_vec4 *b);
+
 t_vec3					sum3_c(t_vec3 a, float b);
 t_vec3					diff3_c(t_vec3 a, float b);
 t_vec3					prod3_c(t_vec3 a, float b);
 t_vec3					quo3_c(t_vec3 a, float b);
-
 t_vec3					sum3(t_vec3 a, t_vec3 b);
 t_vec3					diff3(t_vec3 a, t_vec3 b);
 t_vec3					prod3(t_vec3 a, t_vec3 b);
