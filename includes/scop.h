@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/19 17:53:01 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:54:17 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ t_vec4					*mat_sum(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_diff(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_prod(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_quo(t_vec4 *a, t_vec4 *b);
+
+
+void					tranform(t_vec4 *m, t_vec4 v);
+void					perspective(t_vec4 *m, float f[4]);
+t_vec4					*translate(t_vec4 v, t_vec3 pos);
+t_vec4					*lookat(t_vec3 eye, t_vec3 target, t_vec3 up);
+t_vec4					scale(t_vec4 c, t_vec3 pos);
 
 t_vec3					sum3_c(t_vec3 a, float b);
 t_vec3					diff3_c(t_vec3 a, float b);
