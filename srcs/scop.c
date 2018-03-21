@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/17 16:01:57 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 21:36:49 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void	read_arrays(t_scop *sc)
 				printf(" ; ");
 		}
 		printf("\n");
+	}
+}
+
+void	print_mat(t_vec4 *mat)
+{
+	for (int i = 0; i < 4; i++) {
+		printf("mat[%d] : %f ; %f ; %f ; %f\n", i, mat[i].x, mat[i].y, mat[i].z, mat[i].w);
 	}
 }
 
@@ -79,9 +86,10 @@ int	main(int argc, char *argv[])
 
 	const char* vertex_shader =
 	"#version 410\n"
-	"in vec3 vp;"
-	"void main() {"
-	"  gl_Position = vec4(vp, 1.0);"
+	"layout(location = 0) in vec3 vertexPosition_modelspace;"
+	"uniform mat4 MVP;"
+	"void main(){"
+	"gl_Position =  MVP * vec4(vertexPosition_modelspace,1);"
 	"}";
 
 	const char* fragment_shader =
@@ -97,15 +105,16 @@ int	main(int argc, char *argv[])
 	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fs, 1, &fragment_shader, NULL);
 	glCompileShader(fs);
-
 	GLuint shader_programme = glCreateProgram();
 	glAttachShader(shader_programme, fs);
 	glAttachShader(shader_programme, vs);
 	glLinkProgram(shader_programme);
-
+	GLuint m_id = glGetUniformLocation(shader_programme, "MVP");//---
+	print_mat(sc.mvp);
 	while (!glfwWindowShouldClose(sc.win))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glUniformMatrix4fv(m_id, 1, GL_FALSE, (const GLfloat *)sc.mvp);//---
 		glUseProgram(shader_programme);
 		glBindVertexArrayAPPLE(vao);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
