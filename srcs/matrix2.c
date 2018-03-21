@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:34:46 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 15:55:07 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:28:49 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ static void	set_translation(t_vec4 *translation, t_vec3 eye)
 	translation[3].z = -eye.z;
 }
 
+/*
+** v[0] = forward vector
+** v[1] = right vector
+** v[2] = up vector
+*/
+
 t_vec4		*lookat(t_vec3 eye, t_vec3 target, t_vec3 up)
 {
 	t_vec3	v[3];
@@ -43,9 +49,9 @@ t_vec4		*lookat(t_vec3 eye, t_vec3 target, t_vec3 up)
 	t_vec4	*translation;
 	t_vec4	*res;
 
-	v[0] = normalize(diff3(eye, target));    // The "forward" vector.
-	v[1] = normalize(cross3(up, v[0]));// The "right" vector.
-	v[2] = cross3(v[0], v[1]);     // The "up" vector.
+	v[0] = normalize(diff3(eye, target));
+	v[1] = normalize(cross3(up, v[0]));
+	v[2] = cross3(v[0], v[1]);
 	orientation = new_matrix();
 	translation = new_matrix();
 	res = new_matrix();
