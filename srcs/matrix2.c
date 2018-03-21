@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:34:46 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 17:28:49 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:42:08 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,16 @@ t_vec4		*lookat(t_vec3 eye, t_vec3 target, t_vec3 up)
 	res = mat_prod(orientation, translation);
 	free(orientation);
 	free(translation);
+	return (res);
+}
+
+t_vec4		*mvp(t_vec4 *model, t_vec4 *view, t_vec4 *projection)
+{
+	t_vec4	*tmp;
+	t_vec4	*res;
+
+	tmp = mat_prod(projection, view);
+	res = mat_prod(tmp, model);
+	free(tmp);
 	return (res);
 }
