@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 16:02:22 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 15:54:30 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 18:40:27 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ t_vec4	scale(t_vec4 v, t_vec3 pos)
 	v.z *= pos.z;
 	return (v);
 }
+
+/*
+** f[0] = angle
+** f[1] = ratio
+** f[2] = closest dist
+** f[3] = farest dist
+*/
 
 void	perspective(t_vec4 *m, float f[4])
 {
