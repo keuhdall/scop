@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:34:46 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 19:45:42 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 23:03:34 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,6 @@ t_vec4		*new_identity_m(void)
 	return (m);
 }
 
-static void	set_orientation(t_vec4 *orientation, t_vec3 v[3])
-{
-	orientation[0].x = v[1].x;
-	orientation[0].y = v[2].x;
-	orientation[0].z = v[0].x;
-	orientation[1].x = v[1].y;
-	orientation[1].y = v[2].y;
-	orientation[1].z = v[0].y;
-	orientation[2].x = v[1].z;
-	orientation[2].y = v[2].z;
-	orientation[2].z = v[0].z;
-	orientation[3].w = 1;
-}
-
-static void	set_translation(t_vec4 *translation, t_vec3 eye)
-{
-	translation[0].x = 1;
-	translation[1].y = 1;
-	translation[2].z = 1;
-	translation[3].x = -eye.x;
-	translation[3].y = -eye.y;
-	translation[3].z = -eye.z;
-}
-
 /*
 ** v[0] = forward vector
 ** v[1] = right vector
@@ -57,21 +33,26 @@ static void	set_translation(t_vec4 *translation, t_vec3 eye)
 t_vec4		*lookat(t_vec3 eye, t_vec3 target, t_vec3 up)
 {
 	t_vec3	v[3];
-	t_vec4	*orientation;
-	t_vec4	*translation;
-	t_vec4	*res;
+	t_vec4	*m;
 
 	v[0] = normalize(diff3(eye, target));
 	v[1] = normalize(cross3(up, v[0]));
 	v[2] = cross3(v[0], v[1]);
-	orientation = new_matrix();
-	translation = new_matrix();
-	set_orientation(orientation, v);
-	set_translation(translation, eye);
-	res = mat_prod(orientation, translation);
-	free(orientation);
-	free(translation);
-	return (res);
+	m = new_matrix();
+	m[0].x = v[1].x;
+	m[0].y = v[1].y;
+	m[0].z = v[1].z;
+	m[0].w = -(dot(v[1], eye));
+	m[1].x = v[2].x;
+	m[1].y = v[2].y;
+	m[1].z = v[2].z;
+	m[1].w = -(dot(v[2], eye));
+	m[2].x = v[0].x;
+	m[2].y = v[0].y;
+	m[2].z = v[0].z;
+	m[2].w = -(dot(v[0], eye));
+	m[3].w = 1.0f;
+	return (m);
 }
 
 t_vec4		*mvp(t_vec4 *model, t_vec4 *view, t_vec4 *projection)
