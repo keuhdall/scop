@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/17 15:45:46 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 18:26:22 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ int		count_char(char *s, const char c)
 			count_c++;
 	}
 	return (count_c);
+}
+
+float	degrees_to_rad(float d)
+{
+	return (d * M_PI / 180.0f);
 }
 
 void	puterr(const int err)

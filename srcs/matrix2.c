@@ -6,11 +6,23 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:34:46 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 17:42:08 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 19:45:42 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scop.h"
+
+t_vec4		*new_identity_m(void)
+{
+	t_vec4	*m;
+
+	m = new_matrix();
+	m[0].x = 1.0f;
+	m[1].y = 1.0f;
+	m[2].z = 1.0f;
+	m[3].w = 1.0f;
+	return (m);
+}
 
 static void	set_orientation(t_vec4 *orientation, t_vec3 v[3])
 {
@@ -54,7 +66,6 @@ t_vec4		*lookat(t_vec3 eye, t_vec3 target, t_vec3 up)
 	v[2] = cross3(v[0], v[1]);
 	orientation = new_matrix();
 	translation = new_matrix();
-	res = new_matrix();
 	set_orientation(orientation, v);
 	set_translation(translation, eye);
 	res = mat_prod(orientation, translation);

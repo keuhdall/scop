@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 15:54:17 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 19:24:07 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,24 @@ typedef struct			s_scop
 	t_vec2				*vt_array;
 	t_vec3				*vn_array;
 	t_face				*f_array;
+	t_vec4				*mvp;
 	GLFWwindow			*win;
 }						t_scop;
 
 t_vec4					*new_matrix(void);
+t_vec4					*new_identity_m(void);
 t_vec4					*mat_sum(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_diff(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_prod(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_quo(t_vec4 *a, t_vec4 *b);
 
 
+t_vec4					scale(t_vec4 c, t_vec3 pos);
 void					tranform(t_vec4 *m, t_vec4 v);
 void					perspective(t_vec4 *m, float f[4]);
 t_vec4					*translate(t_vec4 v, t_vec3 pos);
 t_vec4					*lookat(t_vec3 eye, t_vec3 target, t_vec3 up);
-t_vec4					scale(t_vec4 c, t_vec3 pos);
+t_vec4					*mvp(t_vec4 *model, t_vec4 *view, t_vec4 *projection);
 
 t_vec3					sum3_c(t_vec3 a, float b);
 t_vec3					diff3_c(t_vec3 a, float b);
@@ -108,6 +111,7 @@ float					dot(t_vec3 a, t_vec3 b);
 int						get_array_size(char **a);
 int						count_char(char *s, const char c);
 void					free_array(char **a);
+float					degrees_to_rad(float d);
 void					puterr(const int err);
 
 void					read_file(char *name, t_scop *s);

@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/17 13:20:45 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/21 19:45:44 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,43 @@ void	init_glew(void)
 		puterr(ERR_INIT_GLEW);
 }
 
-void	init_window(t_scop *s)
+void	init_window(t_scop *sc)
 {
-	s->win = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Hello Triangle",
+	sc->win = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Hello Triangle",
 			NULL, NULL);
-	if (!s->win)
+	if (!sc->win)
 		puterr(ERR_OPEN_WIN);
-	glfwMakeContextCurrent(s->win);
+	glfwMakeContextCurrent(sc->win);
 }
 
-void	init(t_scop *s)
+void	init_matrix(t_scop *sc)
+{
+	t_vec4	*projection_m;
+	t_vec4	*view_m;
+	t_vec4	*model_m;
+	float	f[4];
+
+	projection_m = new_matrix();
+	f[0] = degrees_to_rad(45.0f);
+	f[1] = WIN_WIDTH / WIN_HEIGHT;
+	f[2] = 0.1f;
+	f[3] = 100.0f;
+	perspective(projection_m, f);
+	view_m = lookat(
+			(t_vec3){4.0, 3.0, 3.0},
+			(t_vec3){0.0, 0.0, 0.0},
+			(t_vec3){0.0, 1.0, 0.0});
+	model_m = new_identity_m();
+	sc->mvp = mvp(model_m, view_m, projection_m);
+	free(model_m);
+	free(view_m);
+	free(projection_m);
+}
+
+void	init(t_scop *sc)
 {
 	init_glfw();
-	init_window(s);
+	init_window(sc);
 	init_glew();
+	init_matrix(sc);
 }
