@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 16:02:22 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 18:40:27 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/23 21:23:53 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,10 @@ t_vec4	*new_matrix(void)
 
 void	transform(t_vec4 *m, t_vec4 v)
 {
-	m[0].x *= v.x;
-	m[0].y *= v.y;
-	m[0].z *= v.z;
-	m[0].w *= v.w;
-	m[1].x *= v.x;
-	m[1].y *= v.y;
-	m[1].z *= v.z;
-	m[1].w *= v.w;
-	m[2].x *= v.x;
-	m[2].y *= v.y;
-	m[2].z *= v.z;
-	m[2].w *= v.w;
-	m[3].x *= v.x;
-	m[3].y *= v.y;
-	m[3].z *= v.z;
-	m[3].w *= v.w;
+	m[0] = (t_vec4){m[0].x * v.x, m[0].y * v.y, m[0].z * v.z, m[0].w * v.w};
+	m[1] = (t_vec4){m[1].x * v.x, m[1].y * v.y, m[1].z * v.z, m[1].w * v.w};
+	m[2] = (t_vec4){m[2].x * v.x, m[2].y * v.y, m[2].z * v.z, m[2].w * v.w};
+	m[3] = (t_vec4){m[3].x * v.x, m[3].y * v.y, m[3].z * v.z, m[3].w * v.w};
 }
 
 t_vec4	*translate(t_vec4 v, t_vec3 pos)
