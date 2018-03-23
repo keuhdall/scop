@@ -28,6 +28,7 @@ GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
 GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 
 SRC_NAME = scop.c \
+			controls.c \
 			init.c \
 			matrix.c \
 			matrix2.c \

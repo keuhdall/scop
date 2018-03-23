@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 19:45:44 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/22 19:54:57 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,15 @@ void	init(t_scop *sc)
 	init_window(sc);
 	init_glew();
 	init_matrix(sc);
+	sc->cam.cam_pos = (t_vec3){0.0f, 0.0f, 5.0f};
+	sc->cam.move_speed = 3.0f;
+	sc->cam.mouse_speed = 0.005f;
+	sc->cam.h_angle = 3.14f;
+	sc->cam.v_angle = 0.0f;
+	sc->cam.fov = 45.0f;
+	sc->cam.cam_dir = (t_vec3){
+		cos(sc->cam.v_angle) * sin(sc->cam.h_angle),
+		sin(sc->cam.v_angle),
+		cos(sc->cam.v_angle) * cos(sc->cam.h_angle)
+	};
 }
