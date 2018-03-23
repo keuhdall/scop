@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/22 20:21:37 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/23 19:26:53 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,10 @@ int	main(int argc, char *argv[])
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	float points[] = {
-		0.0f,  0.5f,  0.0f,
-		0.5f, -0.5f,  0.0f,
-		-0.5f, -0.5f,  0.0f
-	};
-	(void)points;
+	GLuint VertexArrayID;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
+
 	static const GLfloat g_vertex_buffer_data[] = {
 		-1.0f,-1.0f,-1.0f, // triangle 1 : begin
 		-1.0f,-1.0f, 1.0f,
@@ -170,49 +168,16 @@ int	main(int argc, char *argv[])
 		0.982f,  0.099f,  0.879f
 	};
 
-	GLuint vbo = 0;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-	GLuint vao = 0;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-	glVertexAttribPointer(0, 12*3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	GLuint colorbuffer;
-	glGenBuffers(1, &colorbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
-
-/*
-	const char* vertex_shader =
-		"#version 410\n"
-		"layout(location = 0) in vec3 vertexPosition_modelspace;"
-		"uniform mat4 MVP;"
-		"void main(){"
-		"gl_Position =  MVP * vec4(vertexPosition_modelspace,1);"
-		"}";
-*/
 	const char *vertex_shader =
 		"#version 410\n"
+		"layout(location = 0) in vec3 vertexPosition_modelspace;"
+		"layout(location = 1) in vec3 vertexColor;"
 		"out vec3 fragmentColor;"
+		"uniform mat4 MVP;"
 		"void main(){"
+		"	gl_Position = MVP * vec4(vertexPosition_modelspace,1);"
 		"	fragmentColor = vertexColor;"
 		"}";
-/*
-	const char* fragment_shader =
-		"#version 410\n"
-		"layout(location = 0) in vec3 vertexPosition_modelspace;"
-		"out vec4 frag_colour;"
-		"void main() {"
-		"  frag_colour = vec4(0.0, 1.0, 0.0, 1.0);"
-		"}";
-*/
 
 	const char *fragment_shader =
 		"#version 410\n"
@@ -221,6 +186,17 @@ int	main(int argc, char *argv[])
 		"void main(){"
 		"	color = fragmentColor;"
 		"}";
+
+	GLuint vertexbuffer;
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+	GLuint colorbuffer;
+	glGenBuffers(1, &colorbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+
 	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vs, 1, &vertex_shader, NULL);
 	glCompileShader(vs);
@@ -232,25 +208,46 @@ int	main(int argc, char *argv[])
 	glAttachShader(shader_programme, vs);
 	glLinkProgram(shader_programme);
 	GLuint m_id = glGetUniformLocation(shader_programme, "MVP");
-	print_mat(sc.mvp);
 	while (!glfwWindowShouldClose(sc.win))
 	{
 		sc.time.curr = glfwGetTime();
 		sc.time.delta = (float)(sc.time.curr - sc.time.last);
-		//glfwGetCursorPos(sc.win, &sc.cam.mouse_pos.x, &sc.cam.mouse_pos.y);
-		//glfwSetCursorPos(sc.win, (WIN_WIDTH / 2), (WIN_HEIGHT / 2));
-		//recalc_mvp(&sc);
-		//handle_keyboard_input(&sc);
-		//refresh_mouse_view(&sc);
-		glfwWindowHint(GLFW_SAMPLES, 4);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUniformMatrix4fv(m_id, 1, GL_FALSE, (const GLfloat *)sc.mvp);
 		glUseProgram(shader_programme);
-		glBindVertexArrayAPPLE(vao);
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		glDrawArrays(GL_TRIANGLES, 0, 12*3);
-		glfwPollEvents();
+		glUniformMatrix4fv(m_id, 1, GL_FALSE, (const GLfloat *)sc.mvp);
+		print_mat(sc.mvp);
+/*
+		glfwGetCursorPos(sc.win, &sc.cam.mouse_pos.x, &sc.cam.mouse_pos.y);
+		glfwSetCursorPos(sc.win, (WIN_WIDTH / 2), (WIN_HEIGHT / 2));
+		recalc_mvp(&sc);
+		handle_keyboard_input(&sc);
+		refresh_mouse_view(&sc);
+*/
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glVertexAttribPointer(
+		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	glVertexAttribPointer(
+		1,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+		glDrawArrays(GL_TRIANGLES, 0, 3*12);
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 		glfwSwapBuffers(sc.win);
+		glfwPollEvents();
 		sc.time.last = glfwGetTime();
 	}
 	glfwTerminate();

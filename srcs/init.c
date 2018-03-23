@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/22 19:54:57 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/23 19:26:50 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_window(t_scop *sc)
 	if (!sc->win)
 		puterr(ERR_OPEN_WIN);
 	glfwMakeContextCurrent(sc->win);
+	glfwWindowHint(GLFW_SAMPLES, 4);
 }
 
 void	init_matrix(t_scop *sc)
@@ -52,7 +53,7 @@ void	init_matrix(t_scop *sc)
 	f[3] = 100.0f;
 	perspective(projection_m, f);
 	view_m = lookat(
-			(t_vec3){4.0, 3.0, 3.0},
+			(t_vec3){4.0, 3.0, -3.0},
 			(t_vec3){0.0, 0.0, 0.0},
 			(t_vec3){0.0, 1.0, 0.0});
 	model_m = new_identity_m();
