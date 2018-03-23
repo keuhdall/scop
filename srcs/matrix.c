@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 16:02:22 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/23 21:23:53 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/24 00:22:10 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ t_vec4	*translate(t_vec4 v, t_vec3 pos)
 
 t_vec4	scale(t_vec4 v, t_vec3 pos)
 {
-	v.x *= pos.x;
-	v.y *= pos.y;
-	v.z *= pos.z;
-	return (v);
+	return ((t_vec4){v.x * pos.x, v.y * pos.y, v.z * pos.z, v.w});
 }
 
 /*
