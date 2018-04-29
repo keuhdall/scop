@@ -52,4 +52,5 @@ void	refresh_mouse_view(t_scop *sc)
 		0,
 		cos(sc->cam.h_angle - 3.14f / 2.0f)
 	};
+	sc->cam.up_vec = cross3(sc->cam.right_vec, sc->cam.cam_dir);
 }

@@ -50,6 +50,27 @@ void	print_mat(t_vec4 *mat)
 
 void	recalc_mvp(t_scop *sc)
 {
+	free(sc->mvp);
+	t_vec4	*model_m;
+	t_vec4	*view_m;
+	t_vec4	*projection_m;
+	float	f[4];
+
+	projection_m = new_matrix();
+	refresh_mouse_view(sc);
+	handle_keyboard_input(sc);
+	f[0] = degrees_to_rad(sc->cam.fov);
+	f[1] = WIN_WIDTH / WIN_HEIGHT;
+	f[2] = 0.1f;
+	f[3] = 100.0f;
+	perspective(projection_m, f);
+	view_m = lookat(sc->cam.cam_pos, sum3(sc->cam.cam_pos, sc->cam.cam_dir), sc->cam.up_vec);
+	model_m = new_identity_m();
+	sc->mvp = mvp(model_m, view_m, projection_m);
+	free(model_m);
+	free(view_m);
+	free(projection_m);
+/*
 	t_vec4	*model_m;
 	t_vec4	*view_m;
 	t_vec4	*projection_m;
@@ -65,7 +86,7 @@ void	recalc_mvp(t_scop *sc)
 	perspective(projection_m, f);
 	view_m = lookat(sc->cam.cam_pos, diff3(sc->cam.cam_pos, sc->cam.cam_dir),
 			sc->cam.up_vec);
-	sc->mvp = mvp(model_m, view_m, projection_m);
+	sc->mvp = mvp(model_m, view_m, projection_m);*/
 }
 
 int	main(int argc, char *argv[])
@@ -214,35 +235,29 @@ int	main(int argc, char *argv[])
 		sc.time.delta = (float)(sc.time.curr - sc.time.last);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(shader_programme);
+		recalc_mvp(&sc);//
 		glUniformMatrix4fv(m_id, 1, GL_FALSE, (const GLfloat *)sc.mvp);
 		print_mat(sc.mvp);
-/*
-		glfwGetCursorPos(sc.win, &sc.cam.mouse_pos.x, &sc.cam.mouse_pos.y);
-		glfwSetCursorPos(sc.win, (WIN_WIDTH / 2), (WIN_HEIGHT / 2));
-		recalc_mvp(&sc);
-		handle_keyboard_input(&sc);
-		refresh_mouse_view(&sc);
-*/
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glVertexAttribPointer(
-		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-		3,                  // size
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glVertexAttribPointer(
-		1,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-		3,                  // size
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glVertexAttribPointer(
+			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+		);
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+		glVertexAttribPointer(
+			1,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+		);
 		glDrawArrays(GL_TRIANGLES, 0, 3*12);
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
