@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:34:46 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/23 21:18:39 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/03/25 22:31:55 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_vec4		*new_identity_m(void)
 }
 
 /*
-** v[0] = forward vector
-** v[1] = right vector
-** v[2] = up vector
+** v[0] = forward vector -> Z
+** v[1] = right vector   -> X
+** v[2] = up vector      -> Y
 */
 
 t_vec4		*lookat(t_vec3 eye, t_vec3 target, t_vec3 up)
@@ -37,7 +37,7 @@ t_vec4		*lookat(t_vec3 eye, t_vec3 target, t_vec3 up)
 
 	v[0] = normalize(diff3(eye, target));
 	v[1] = normalize(cross3(up, v[0]));
-	v[2] = cross3(v[0], v[1]);
+	v[2] = normalize(cross3(v[0], v[1]));
 	m = new_matrix();
 	m[0] = (t_vec4){v[1].x, v[1].y, v[1].z, -dot(v[1], eye)};
 	m[1] = (t_vec4){v[2].x, v[2].y, v[2].z, -dot(v[2], eye)};
