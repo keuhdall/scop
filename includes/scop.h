@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/05/01 19:35:45 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/05/01 21:47:29 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
 # define LINE_SIZE 1024
+# define MOVE_SPEED 4.0f
+# define MOUSE_SPEED 0.015f
+# define FOV 45.0f
 
 enum	e_errors
 {
