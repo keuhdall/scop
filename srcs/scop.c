@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/05/01 21:11:49 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:20:25 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,8 @@ int	main(int argc, char *argv[])
 	glAttachShader(shader_programme, fs);
 	glAttachShader(shader_programme, vs);
 	glLinkProgram(shader_programme);
-	while (!glfwWindowShouldClose(sc.win))
+	while (!glfwWindowShouldClose(sc.win) &&
+			glfwGetKey(sc.win, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		sc.time.curr = glfwGetTime();
 		sc.time.delta = (float)(sc.time.curr - sc.time.last);
