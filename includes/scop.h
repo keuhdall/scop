@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/22 19:41:57 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:35:45 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ t_vec4					*mat_sum(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_diff(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_prod(t_vec4 *a, t_vec4 *b);
 t_vec4					*mat_quo(t_vec4 *a, t_vec4 *b);
-
 
 t_vec4					scale(t_vec4 c, t_vec3 pos);
 void					tranform(t_vec4 *m, t_vec4 v);
