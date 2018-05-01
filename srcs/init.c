@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/23 19:26:50 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/05/01 21:11:48 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	init_glew(void)
 
 void	init_window(t_scop *sc)
 {
-	sc->win = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Hello Triangle",
-			NULL, NULL);
+	sc->win = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Scop", NULL, NULL);
 	if (!sc->win)
 		puterr(ERR_OPEN_WIN);
 	glfwMakeContextCurrent(sc->win);
 	glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwSetInputMode(sc->win, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 void	init_matrix(t_scop *sc)
