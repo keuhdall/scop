@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/23 19:26:53 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:34:26 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,6 @@ void	recalc_mvp(t_scop *sc)
 	free(model_m);
 	free(view_m);
 	free(projection_m);
-/*
-	t_vec4	*model_m;
-	t_vec4	*view_m;
-	t_vec4	*projection_m;
-	float	f[4];
-
-	model_m = new_identity_m();
-	view_m = new_matrix();
-	projection_m = new_matrix();
-	f[0] = degrees_to_rad(45.0f);
-	f[1] = WIN_WIDTH / WIN_HEIGHT;
-	f[2] = 0.1f;
-	f[3] = 100.0f;
-	perspective(projection_m, f);
-	view_m = lookat(sc->cam.cam_pos, diff3(sc->cam.cam_pos, sc->cam.cam_dir),
-			sc->cam.up_vec);
-	sc->mvp = mvp(model_m, view_m, projection_m);*/
 }
 
 int	main(int argc, char *argv[])
@@ -98,12 +81,11 @@ int	main(int argc, char *argv[])
 		read_file(argv[1], &sc);
 	init(&sc);
 	read_arrays(&sc);
-	//while (1) continue ;
-	//return (0);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
 	printf("OpenGL version supported %s\n", version);
+	glfwSetInputMode(sc.win, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
@@ -218,6 +200,26 @@ int	main(int argc, char *argv[])
 	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glVertexAttribPointer(
+		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	glVertexAttribPointer(
+		1,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
 	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vs, 1, &vertex_shader, NULL);
 	glCompileShader(vs);
@@ -228,42 +230,20 @@ int	main(int argc, char *argv[])
 	glAttachShader(shader_programme, fs);
 	glAttachShader(shader_programme, vs);
 	glLinkProgram(shader_programme);
-	GLuint m_id = glGetUniformLocation(shader_programme, "MVP");
 	while (!glfwWindowShouldClose(sc.win))
 	{
 		sc.time.curr = glfwGetTime();
 		sc.time.delta = (float)(sc.time.curr - sc.time.last);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(shader_programme);
 		recalc_mvp(&sc);//
-		glUniformMatrix4fv(m_id, 1, GL_FALSE, (const GLfloat *)sc.mvp);
+		GLuint m_id = glGetUniformLocation(shader_programme, "MVP");
+		glUniformMatrix4fv(m_id, 1, GL_TRUE, (const GLfloat *)sc.mvp);
+		glUseProgram(shader_programme);
 		print_mat(sc.mvp);
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-		glVertexAttribPointer(
-			1,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 3*12);
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glfwSwapBuffers(sc.win);
 		glfwPollEvents();
-		sc.time.last = glfwGetTime();
+		glfwSwapBuffers(sc.win);
+		sc.time.last = sc.time.curr;
 	}
 	glfwTerminate();
 	return (0);

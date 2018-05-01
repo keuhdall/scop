@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 18:46:05 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/23 16:58:03 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:28:40 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	handle_keyboard_input(t_scop *sc)
 
 void	refresh_mouse_view(t_scop *sc)
 {
+	glfwGetCursorPos(sc->win, &sc->cam.mouse_pos.x, &sc->cam.mouse_pos.y);
+	glfwSetCursorPos(sc->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	sc->cam.h_angle += sc->cam.mouse_speed * sc->time.delta *
 		(float)(WIN_WIDTH / 2 - sc->cam.mouse_pos.x);
 	sc->cam.v_angle += sc->cam.mouse_speed * sc->time.delta *
