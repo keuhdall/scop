@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 18:46:05 by lmarques          #+#    #+#             */
-/*   Updated: 2018/05/01 19:28:40 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:16:46 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	handle_keyboard_input(t_scop *sc)
 {
-	if (glfwGetKey(sc->win, GLFW_KEY_UP) == GLFW_PRESS)
+	if (glfwGetKey(sc->win, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		sc->cam.cam_pos = sum3(sc->cam.cam_pos, prod3_c(sc->cam.cam_dir,
 				sc->time.delta * sc->cam.move_speed));
 	}
-	if (glfwGetKey(sc->win, GLFW_KEY_DOWN) == GLFW_PRESS)
+	if (glfwGetKey(sc->win, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		sc->cam.cam_pos = diff3(sc->cam.cam_pos, prod3_c(sc->cam.cam_dir,
 				sc->time.delta * sc->cam.move_speed));
 	}
-	if (glfwGetKey(sc->win, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	if (glfwGetKey(sc->win, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		sc->cam.cam_pos = sum3(sc->cam.cam_pos, prod3_c(sc->cam.right_vec,
 				sc->time.delta * sc->cam.move_speed));
 	}
-	if (glfwGetKey(sc->win, GLFW_KEY_LEFT) == GLFW_PRESS)
+	if (glfwGetKey(sc->win, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		sc->cam.cam_pos = diff3(sc->cam.cam_pos, prod3_c(sc->cam.right_vec,
 				sc->time.delta * sc->cam.move_speed));
