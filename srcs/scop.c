@@ -64,7 +64,8 @@ void	recalc_mvp(t_scop *sc)
 	f[2] = 0.1f;
 	f[3] = 100.0f;
 	perspective(projection_m, f);
-	view_m = lookat(sc->cam.cam_pos, sum3(sc->cam.cam_pos, sc->cam.cam_dir), sc->cam.up_vec);
+	view_m = lookat(sc->cam.cam_pos, sum3(sc->cam.cam_pos, sc->cam.cam_dir),
+		sc->cam.up_vec);
 	model_m = new_identity_m();
 	sc->mvp = mvp(model_m, view_m, projection_m);
 	free(model_m);
