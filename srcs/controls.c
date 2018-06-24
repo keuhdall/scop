@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 18:46:05 by lmarques          #+#    #+#             */
-/*   Updated: 2018/06/24 00:05:32 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:39:02 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	refresh_mouse_view(t_scop *sc)
 		cos(sc->cam.v_angle) * cos(sc->cam.h_angle)
 	};
 	sc->cam.right_vec = (t_vec3){
-		sin(sc->cam.h_angle - 3.14f / 2.0f),
+		sin(sc->cam.h_angle - M_PI / 2.0f),
 		0,
-		cos(sc->cam.h_angle - 3.14f / 2.0f)
+		cos(sc->cam.h_angle - M_PI / 2.0f)
 	};
 	sc->cam.up_vec = cross3(sc->cam.right_vec, sc->cam.cam_dir);
 }
