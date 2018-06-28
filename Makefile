@@ -6,7 +6,7 @@
 #*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/19 05:25:46 by lmarques          #+#    #+#             *#
-#*   Updated: 2018/03/08 07:48:30 by lmarques         ###   ########.fr       *#
+#*   Updated: 2018/06/28 03:48:08 by lmarques         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -35,6 +35,7 @@ SRC_NAME = scop.c \
 			matrix_op.c \
 			reader.c \
 			parse.c \
+			parse_bmp.c \
 			tools.c \
 			vec_op.c \
 			vec_op2.c \
