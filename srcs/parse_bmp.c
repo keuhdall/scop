@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 19:04:25 by lmarques          #+#    #+#             */
-/*   Updated: 2018/06/28 03:47:20 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/06/28 03:48:53 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void			read_header(t_scop *sc, int fd)
 {
-	int		height;
 	char	header[54];
-	int		width;
 
 	read(fd, header, 54);
 	sc->bmp.width = *(int *)&header[18];
 	sc->bmp.height = *(int *)&header[22];
-	sc->bmp.size = 3 * width * height;
+	sc->bmp.size = 3 * sc->bmp.width * sc->bmp.height;
 }
 
 unsigned char	get_bmp_pixel(t_scop *sc, int width_index, int height_index)
