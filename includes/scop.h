@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/05/07 20:52:31 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/06/28 03:38:12 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,14 @@ typedef struct			s_time
 	double				delta;
 }						t_time;
 
+typedef struct			s_bmp
+{
+	int					width;
+	int					height;
+	int					size;
+	unsigned char		*data;
+}						t_bmp;
+
 typedef struct			s_scop
 {
 	int					v_size;
@@ -107,6 +115,7 @@ typedef struct			s_scop
 	t_vec2				*vt_array;
 	t_vec3				*vn_array;
 	t_face				*f_array;
+	t_bmp				bmp;
 	t_vec4				*mvp;
 	t_camera			cam;
 	t_time				time;
