@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/21 18:26:22 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/07/07 22:51:06 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ void	puterr(const int err)
 		dprintf(2, "Error : an occured while allocating memory, exiting.\n");
 	else if (err == ERR_OPEN_FILE)
 		dprintf(2, "Error : could not open the file\n");
+	else if (err == ERR_INVALID_BMP)
+		dprintf(2, "Error : invalid BMP file\n");
 	exit(1);
 }

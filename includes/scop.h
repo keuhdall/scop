@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/06/28 03:52:49 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/07/07 22:50:05 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ enum	e_errors
 	ERR_OPEN_WIN,
 	ERR_BAD_FORMAT,
 	ERR_MALLOC_FAILED,
-	ERR_OPEN_FILE
+	ERR_OPEN_FILE,
+	ERR_INVALID_BMP
 };
 
 typedef struct			s_vec2

@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 19:04:25 by lmarques          #+#    #+#             */
-/*   Updated: 2018/06/28 03:48:53 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/07/07 22:52:53 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void			read_header(t_scop *sc, int fd)
 {
 	char	header[54];
 
-	read(fd, header, 54);
+	if (read(fd, header, 54) != 54 || header[0] != 'B' || header[1] != 'M')
+		puterr(ERR_INVALID_BMP);
 	sc->bmp.width = *(int *)&header[18];
 	sc->bmp.height = *(int *)&header[22];
 	sc->bmp.size = 3 * sc->bmp.width * sc->bmp.height;
