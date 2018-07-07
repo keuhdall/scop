@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 18:46:05 by lmarques          #+#    #+#             */
-/*   Updated: 2018/06/24 17:39:02 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/07/07 22:14:24 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	refresh_mouse_view(t_scop *sc)
 		(float)(WIN_WIDTH / 2 - sc->cam.mouse_pos.x);
 	sc->cam.v_angle += sc->cam.mouse_speed * sc->time.delta *
 		(float)(WIN_HEIGHT / 2 - sc->cam.mouse_pos.y);
-
 	sc->cam.v_angle = sc->cam.v_angle < -M_PI / 2 ? -M_PI / 2 : sc->cam.v_angle;
 	sc->cam.v_angle = sc->cam.v_angle > M_PI / 2 ? M_PI / 2 : sc->cam.v_angle;
 	sc->cam.cam_dir = (t_vec3){
