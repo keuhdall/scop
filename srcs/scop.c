@@ -239,7 +239,6 @@ int	main(int argc, char *argv[])
 		GLuint m_id = glGetUniformLocation(shader_programme, "MVP");
 		glUniformMatrix4fv(m_id, 1, GL_TRUE, (const GLfloat *)sc.mvp);
 		glUseProgram(shader_programme);
-		print_mat(sc.mvp);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 3*12);
 		glfwPollEvents();
