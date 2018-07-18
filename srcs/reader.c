@@ -22,6 +22,8 @@ void	get_line_type(char *line, t_scop *sc)
 		parse_v(line, sc);
 	else if (!strncmp(line, "f", 1))
 		parse_f(line, sc);
+	else if (!strncmp(line, "usemtl", 6))
+		parse_bmp(line, sc);
 }
 
 void	read_file(char *name, t_scop *sc)

@@ -31,13 +31,28 @@ unsigned char	get_bmp_pixel(t_scop *sc, int width_index, int height_index)
 	return (sc->bmp.data[3 * (width_index * sc->bmp.width * height_index)]);
 }
 
-void			parse_bmp(char *name, t_scop *sc)
+char			*get_bmp_name(char *line)
+{
+	char	**a;
+	char	*name;
+
+	a = ft_strsplit(line, ' ');
+	name = (!a[1] ? NULL : ft_strdup(a[1]));
+	free_array(a);
+	return (name);
+}
+
+void			parse_bmp(char *line, t_scop *sc)
 {
 	int				count;
+	char			*name;
 	int				fd;
 	unsigned char	tmp;
 
 	count = 0;
+	if (!(name = get_bmp_name(line)))
+		puterr(ERR_INVALID_BMP);
+	printf("trying to open file : %s\n", name);
 	fd = open(name, O_RDONLY);
 	read_header(sc, fd);
 	read(fd, &sc->bmp.data, sc->bmp.size);
