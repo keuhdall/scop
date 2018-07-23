@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 19:04:25 by lmarques          #+#    #+#             */
-/*   Updated: 2018/07/23 17:55:28 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/07/23 18:14:11 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void			parse_bmp(char *line, t_scop *sc)
 	printf("trying to open file : %s\n", name);
 	fd = open(name, O_RDONLY);
 	read_header(sc, fd);
-	read(fd, sc->bmp.data, sc->bmp.size);
 	if (!(sc->bmp.data = (unsigned char *)malloc(sizeof(unsigned char) *
 		sc->bmp.size)))
 		puterr(ERR_MALLOC_FAILED);
+	read(fd, sc->bmp.data, sc->bmp.size);
 	while (count < sc->bmp.size)
 	{
 		tmp = sc->bmp.data[count];
