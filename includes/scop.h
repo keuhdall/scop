@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/08/04 01:16:32 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/08/04 01:19:15 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,5 @@ void					parse_vn(char *line, t_scop *s);
 void					parse_f(char *line, t_scop *s);
 
 void					parse_bmp(char *name, t_scop *sc);
-							int width_index, int height_index);
-
+GLuint					load_shaders(char *vs_name, char *fs_name);
 #endif
