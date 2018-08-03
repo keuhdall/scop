@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/05/01 22:20:25 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/08/04 01:31:52 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	main(int argc, char *argv[])
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
+	GLuint program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/test.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/test.frag");
 
 	static const GLfloat g_vertex_buffer_data[] = {
 		-1.0f,-1.0f,-1.0f, // triangle 1 : begin
@@ -171,24 +172,6 @@ int	main(int argc, char *argv[])
 		0.982f,  0.099f,  0.879f
 	};
 
-	const char *vertex_shader =
-		"#version 410\n"
-		"layout(location = 0) in vec3 vertexPosition_modelspace;"
-		"layout(location = 1) in vec3 vertexColor;"
-		"out vec3 fragmentColor;"
-		"uniform mat4 MVP;"
-		"void main(){"
-		"	gl_Position = MVP * vec4(vertexPosition_modelspace,1);"
-		"	fragmentColor = vertexColor;"
-		"}";
-
-	const char *fragment_shader =
-		"#version 410\n"
-		"in vec3 fragmentColor;"
-		"out vec3 color;"
-		"void main(){"
-		"	color = fragmentColor;"
-		"}";
 
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
@@ -220,25 +203,15 @@ int	main(int argc, char *argv[])
 		0,                  // stride
 		(void*)0            // array buffer offset
 	);
-	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vs, 1, &vertex_shader, NULL);
-	glCompileShader(vs);
-	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fs, 1, &fragment_shader, NULL);
-	glCompileShader(fs);
-	GLuint shader_programme = glCreateProgram();
-	glAttachShader(shader_programme, fs);
-	glAttachShader(shader_programme, vs);
-	glLinkProgram(shader_programme);
 	while (!glfwWindowShouldClose(sc.win) &&
 			glfwGetKey(sc.win, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		sc.time.curr = glfwGetTime();
 		sc.time.delta = (float)(sc.time.curr - sc.time.last);
 		recalc_mvp(&sc);//
-		GLuint m_id = glGetUniformLocation(shader_programme, "MVP");
+		GLuint m_id = glGetUniformLocation(program_id, "MVP");
 		glUniformMatrix4fv(m_id, 1, GL_TRUE, (const GLfloat *)sc.mvp);
-		glUseProgram(shader_programme);
+		glUseProgram(program_id);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 3*12);
 		glfwPollEvents();

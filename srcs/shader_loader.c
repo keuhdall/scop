@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 23:05:01 by lmarques          #+#    #+#             */
-/*   Updated: 2018/08/04 01:03:25 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/08/04 01:54:19 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ char	*get_file_content(char *name)
 	int		fd;
 	int		ret;
 	char	*line;
+	char	*tmp;
 	char	*file_content;
 
-	file_content = NULL;
 	fd = open(name, O_RDONLY);
+	file_content = ft_strdup("");
 	while ((ret = get_next_line(fd, &line)))
 	{
 		if (ret == -1)
 			puterr(ERR_OPEN_FILE);
 		ft_realloc(file_content, ft_strlen(file_content) + ft_strlen(line));
-		ft_strcat(file_content, line);
+		tmp = ft_strjoin(file_content, ft_strdup(line));
+		ft_strcpy(tmp, file_content);
+		free(tmp);
 		free(line);
 	}
 	free(line);
@@ -47,6 +50,7 @@ GLuint	get_vertex_shader(char *vs_name)
 	glGetShaderiv(vs_id, GL_INFO_LOG_LENGTH, &log_length);
 	if (log_length > 0)
 		puterr(ERR_LOADING_SHADER);
+	printf("vs_content : %s\n", vs_content);
 	return (vs_id);
 }
 
@@ -63,6 +67,7 @@ GLuint	get_fragment_shader(char *fs_name)
 	glGetShaderiv(fs_id, GL_INFO_LOG_LENGTH, &log_length);
 	if (log_length > 0)
 		puterr(ERR_LOADING_SHADER);
+	printf("fs_content : %s\n", fs_content);
 	return (fs_id);
 }
 
