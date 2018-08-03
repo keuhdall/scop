@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/07/07 22:50:05 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/08/03 23:55:05 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ enum	e_errors
 	ERR_BAD_FORMAT,
 	ERR_MALLOC_FAILED,
 	ERR_OPEN_FILE,
-	ERR_INVALID_BMP
+	ERR_INVALID_BMP,
+	ERR_LOADING_SHADER,
+	ERR_CREATING_PROGRAM
 };
 
 typedef struct			s_vec2

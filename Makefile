@@ -36,6 +36,7 @@ SRC_NAME = scop.c \
 			reader.c \
 			parse.c \
 			parse_bmp.c \
+			shader_loader.c \
 			tools.c \
 			vec_op.c \
 			vec_op2.c \

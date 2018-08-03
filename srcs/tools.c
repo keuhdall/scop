@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/07/07 22:51:06 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/08/03 23:56:09 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,9 @@ void	puterr(const int err)
 		dprintf(2, "Error : could not open the file\n");
 	else if (err == ERR_INVALID_BMP)
 		dprintf(2, "Error : invalid BMP file\n");
+	else if (err == ERR_LOADING_SHADER)
+		dprintf(2, "Error : failed to load a shader, exiting.\n");
+	else if (err == ERR_CREATING_PROGRAM)
+		dprintf(2, "Error creating program from shaders, exiting\n");
 	exit(1);
 }
