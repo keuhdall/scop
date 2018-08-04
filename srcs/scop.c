@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/08/04 01:31:52 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/08/04 18:52:52 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,14 +208,16 @@ int	main(int argc, char *argv[])
 	{
 		sc.time.curr = glfwGetTime();
 		sc.time.delta = (float)(sc.time.curr - sc.time.last);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		recalc_mvp(&sc);//
 		GLuint m_id = glGetUniformLocation(program_id, "MVP");
 		glUniformMatrix4fv(m_id, 1, GL_TRUE, (const GLfloat *)sc.mvp);
 		glUseProgram(program_id);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 3*12);
-		glfwPollEvents();
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
 		glfwSwapBuffers(sc.win);
+		glfwPollEvents();
 		sc.time.last = sc.time.curr;
 	}
 	glfwTerminate();

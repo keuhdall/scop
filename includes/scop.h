@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/08/04 01:19:15 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/08/04 17:38:06 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <math.h>
+# include <sys/stat.h>
 # include <GL/glew.h>
 # include <OpenGL/gl.h>
 # include <OpenGL/glu.h>
