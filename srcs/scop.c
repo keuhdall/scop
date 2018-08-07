@@ -90,6 +90,45 @@ static const GLfloat g_color_buffer_data[] = {
 	0.982f,  0.099f,  0.879f
 };
 
+static const GLfloat g_uv_buffer_data[] = {
+	0.000059f, 1.0f-0.000004f,
+	0.000103f, 1.0f-0.336048f,
+	0.335973f, 1.0f-0.335903f,
+	1.000023f, 1.0f-0.000013f,
+	0.667979f, 1.0f-0.335851f,
+	0.999958f, 1.0f-0.336064f,
+	0.667979f, 1.0f-0.335851f,
+	0.336024f, 1.0f-0.671877f,
+	0.667969f, 1.0f-0.671889f,
+	1.000023f, 1.0f-0.000013f,
+	0.668104f, 1.0f-0.000013f,
+	0.667979f, 1.0f-0.335851f,
+	0.000059f, 1.0f-0.000004f,
+	0.335973f, 1.0f-0.335903f,
+	0.336098f, 1.0f-0.000071f,
+	0.667979f, 1.0f-0.335851f,
+	0.335973f, 1.0f-0.335903f,
+	0.336024f, 1.0f-0.671877f,
+	1.000004f, 1.0f-0.671847f,
+	0.999958f, 1.0f-0.336064f,
+	0.667979f, 1.0f-0.335851f,
+	0.668104f, 1.0f-0.000013f,
+	0.335973f, 1.0f-0.335903f,
+	0.667979f, 1.0f-0.335851f,
+	0.335973f, 1.0f-0.335903f,
+	0.668104f, 1.0f-0.000013f,
+	0.336098f, 1.0f-0.000071f,
+	0.000103f, 1.0f-0.336048f,
+	0.000004f, 1.0f-0.671870f,
+	0.336024f, 1.0f-0.671877f,
+	0.000103f, 1.0f-0.336048f,
+	0.336024f, 1.0f-0.671877f,
+	0.335973f, 1.0f-0.335903f,
+	0.667969f, 1.0f-0.671889f,
+	1.000004f, 1.0f-0.671847f,
+	0.667979f, 1.0f-0.335851f
+};
+
 void	read_arrays(t_scop *sc)
 {
 	int	count;
@@ -115,6 +154,7 @@ void	read_arrays(t_scop *sc)
 			if (count_f < sc->f_array[count].v_size - 1)
 				printf(" ; ");
 		}
+// "Bind" the newly created texture : all future texture functions will modify this texture
 		printf("\n");
 	}
 }
@@ -153,6 +193,7 @@ void	recalc_mvp(t_scop *sc)
 
 int	main(int argc, char *argv[])
 {
+	(void)g_color_buffer_data;
 	t_scop	sc;
 
 	ft_bzero(&sc, sizeof(sc));
@@ -170,7 +211,19 @@ int	main(int argc, char *argv[])
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
-	GLuint program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/test.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/test.frag");
+
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, sc.bmp.width, sc.bmp.height, 0, GL_BGR, GL_UNSIGNED_BYTE, sc.bmp.data);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	//GLuint program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/test.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/test.frag");
+	GLuint program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/tex_cube.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/tex_cube.frag");
 
 
 	GLuint vertexbuffer;
@@ -178,10 +231,17 @@ int	main(int argc, char *argv[])
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
+/*
 	GLuint colorbuffer;
 	glGenBuffers(1, &colorbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+*/
+
+	GLuint uvbuffer;
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -194,7 +254,8 @@ int	main(int argc, char *argv[])
 		(void*)0            // array buffer offset
 	);
 	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	//glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glVertexAttribPointer(
 		1,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
 		3,                  // size
