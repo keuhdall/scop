@@ -28,6 +28,7 @@ GLFW_INC_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/include/
 GLFW_LIB_PATH=/Users/lmarques/.brew/Cellar/glfw/3.2.1/lib/
 
 SRC_NAME = scop.c \
+		   check_f.c \
 			controls.c \
 			init.c \
 			matrix.c \
@@ -36,6 +37,7 @@ SRC_NAME = scop.c \
 			reader.c \
 			parse.c \
 			parse_bmp.c \
+			parse_face.c \
 			shader_loader.c \
 			tools.c \
 			vec_op.c \

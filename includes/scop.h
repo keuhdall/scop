@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/08/04 17:38:06 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/19 15:11:10 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@
 # define MOVE_SPEED 4.0f
 # define MOUSE_SPEED 0.02f
 # define FOV 45.0f
+
+enum	e_indexes
+{
+	V_INDEX,
+	VT_INDEX,
+	VN_INDEX
+};
 
 enum	e_errors
 {

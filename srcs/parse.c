@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/17 13:22:08 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:31:44 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,34 +60,6 @@ void	parse_vn(char *line, t_scop *sc)
 	sc->vn_size++;
 	sc->vn_array = ft_realloc(sc->vn_array, sizeof(t_vec3) * sc->vn_size);
 	sc->vn_array[sc->vn_size - 1] = v3;
-}
-
-void	fill_f(char *s, t_face *f)
-{
-	char	**a;
-
-	a = ft_strsplit(s, '/');
-	f->v_size++;
-	f->vt_size++;
-	f->vn_size++;
-	f->v = ft_realloc(f->v, sizeof(int) * f->v_size);
-	f->vt = ft_realloc(f->vt, sizeof(int) * f->vt_size);
-	f->vn = ft_realloc(f->vn, sizeof(int) * f->vn_size);
-	if (!count_char(s, '/'))
-	{
-		f->v[f->v_size - 1] = atoi(s);
-		f->vt[f->vt_size - 1] = 0;
-		f->vn[f->vn_size - 1] = 0;
-	}
-	else if (get_array_size(a) >= 3)
-	{
-		f->v[f->v_size - 1] = atoi(a[0]);
-		f->vt[f->vt_size - 1] = atoi(a[1]);
-		f->vn[f->vn_size - 1] = atoi(a[2]);
-	}
-	else
-		puterr(ERR_BAD_FORMAT);
-	free_array(a);
 }
 
 void	parse_f(char *line, t_scop *sc)
