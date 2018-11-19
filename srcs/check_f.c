@@ -12,37 +12,17 @@
 
 #include "../includes/scop.h"
 
-void	check_index(t_scop *sc, int index, int f_index)
+
+
+void	check_index(void *array, int array_size, int max_size)
 {
 	int	count;
 
-	count = 0;
-	if (index == V_INDEX)
+	count = -1;
+	while (++count < array_size)
 	{
-		while (count < sc->f_array[f_index].v[count])
-		{
-			if (sc->f_array[f_index].v[count] >= sc->v_size)
-				puterr(ERR_BAD_FORMAT);
-			count++;
-		}
-	}
-	else if (index == VT_INDEX)
-	{
-		while (count < sc->f_array[f_index].vt[count])
-		{
-			if (sc->f_array[f_index].vt[count] >= sc->vt_size)
-				puterr(ERR_BAD_FORMAT);
-			count++;
-		}
-	}
-	else if (index == VN_INDEX)
-	{
-		while (count < sc->f_array[f_index].vn[count])
-		{
-			if (sc->f_array[f_index].vn[count] >= sc->vn_size)
-				puterr(ERR_BAD_FORMAT);
-			count++;
-		}
+		if (((int *)array)[count] >= max_size)
+			puterr(ERR_BAD_FORMAT);
 	}
 }
 
@@ -51,10 +31,13 @@ void	check_f(t_scop *sc)
 	int	count;
 
 	count = -1;
-	while (sc->f_array + (++count))
+	while (++count < sc->f_size)
 	{
-		check_index(sc, V_INDEX, count);
-		check_index(sc, VT_INDEX, count);
-		check_index(sc, VN_INDEX, count);
+		check_index(sc->f_array[count].v, sc->f_array[count].v_size,
+			sc->v_size);
+		check_index(sc->f_array[count].vt, sc->f_array[count].vt_size,
+			sc->vt_size);
+		check_index(sc->f_array[count].vn, sc->f_array[count].vn_size,
+			sc->vn_size);
 	}
 }

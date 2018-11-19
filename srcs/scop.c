@@ -131,6 +131,8 @@ static const GLfloat g_uv_buffer_data[] = {
 
 void	read_arrays(t_scop *sc)
 {
+	(void)g_vertex_buffer_data;
+	(void)g_uv_buffer_data;
 	int	count;
 	int	count_f;
 
@@ -199,6 +201,7 @@ int	main(int argc, char *argv[])
 	ft_bzero(&sc, sizeof(sc));
 	if (argc > 1)
 		read_file(argv[1], &sc);
+	check_f(&sc);
 	init(&sc);
 	read_arrays(&sc);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
@@ -225,23 +228,26 @@ int	main(int argc, char *argv[])
 	//GLuint program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/test.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/test.frag");
 	GLuint program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/tex_cube.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/tex_cube.frag");
 
-
+/*
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
-/*
-	GLuint colorbuffer;
-	glGenBuffers(1, &colorbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
-*/
-
 	GLuint uvbuffer;
 	glGenBuffers(1, &uvbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+*/
+	GLuint vertexbuffer;
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(t_vec3) * sc.v_size, &sc.v_array[0], GL_STATIC_DRAW);
+
+	GLuint uvbuffer;
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(t_vec2) * sc.vt_size, &sc.vt_array[0], GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -254,7 +260,6 @@ int	main(int argc, char *argv[])
 		(void*)0            // array buffer offset
 	);
 	glEnableVertexAttribArray(1);
-	//glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glVertexAttribPointer(
 		1,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.

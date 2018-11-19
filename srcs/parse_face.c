@@ -54,9 +54,34 @@ void	fill_f(char *s, t_face *f)
 	else if (get_array_size(a) == 3)
 		fill_f3(a, f);
 	else
-	{
-		free_array(a);
 		puterr(ERR_BAD_FORMAT);
-	}
 	free_array(a);
+}
+
+void	resolve_f(t_scop *sc)
+{
+	int		count;
+	t_vec3	*tmp_v;
+	t_vec2	*tmp_vt;
+	t_vec3	*tmp_vn;
+
+	count = -1;
+	if (!(tmp_v = (t_vec3 *)malloc(sizeof(t_vec3) * sc->v_size)))
+		puterr(ERR_MALLOC_FAILED);
+	if (!(tmp_vt = (t_vec2 *)malloc(sizeof(t_vec2) * sc->vt_size)))
+		puterr(ERR_MALLOC_FAILED);
+	if (!(tmp_vn = (t_vec3 *)malloc(sizeof(t_vec3) * sc->vn_size)))
+		puterr(ERR_MALLOC_FAILED);
+	memcpy(tmp_v, sc->v_array, sc->v_size);
+	memcpy(tmp_vt, sc->vt_array, sc->vt_size);
+	memcpy(tmp_vn, sc->vn_array, sc->vn_size);
+	while (++count < sc->f_size)
+	{
+		sc->v_array[count] = tmp_v[sc->f_array[count].v[0]];
+		sc->vt_array[count] = tmp_vt[sc->f_array[count].vt[0]];
+		sc->vn_array[count] = tmp_vn[sc->f_array[count].vn[0]];
+	}
+	free(tmp_v);
+	free(tmp_vt);
+	free(tmp_vn);
 }

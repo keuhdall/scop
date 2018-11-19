@@ -175,6 +175,9 @@ void					parse_v(char *line, t_scop *s);
 void					parse_vt(char *line, t_scop *s);
 void					parse_vn(char *line, t_scop *s);
 void					parse_f(char *line, t_scop *s);
+void					fill_f(char *s, t_face *f);
+void					check_f(t_scop *sc);
+void					resolve_f(t_scop *sc);
 
 void					parse_bmp(char *name, t_scop *sc);
 GLuint					load_shaders(char *vs_name, char *fs_name);
