@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/08/15 19:22:24 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/20 19:29:37 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,14 +137,14 @@ void	read_arrays(t_scop *sc)
 	int	count_f;
 
 	count = -1;
-	while (++count < sc->v_size)
-		printf("v : %f ; %f ; %f\n", sc->v_array[count].x, sc->v_array[count].y, sc->v_array[count].z);
+	while (++count < sc->tmp_v_size)
+		printf("v : %f ; %f ; %f\n", sc->tmp_v_array[count].x, sc->tmp_v_array[count].y, sc->tmp_v_array[count].z);
 	count = -1;
-	while (++count < sc->vt_size)
-		printf("vt : %f ; %f\n", sc->vt_array[count].x, sc->vt_array[count].y);
+	while (++count < sc->tmp_vt_size)
+		printf("vt : %f ; %f\n", sc->tmp_vt_array[count].x, sc->tmp_vt_array[count].y);
 	count = -1;
-	while (++count < sc->vn_size)
-		printf("vn : %f ; %f ; %f\n", sc->vn_array[count].x, sc->vn_array[count].y, sc->vn_array[count].z);
+	while (++count < sc->tmp_vn_size)
+		printf("vn : %f ; %f ; %f\n", sc->tmp_vn_array[count].x, sc->tmp_vn_array[count].y, sc->tmp_vn_array[count].z);
 	count = -1;
 	while (++count < sc->f_size)
 	{
@@ -204,6 +204,7 @@ int	main(int argc, char *argv[])
 	check_f(&sc);
 	init(&sc);
 	read_arrays(&sc);
+	//resolve_f(&sc);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
@@ -269,12 +270,14 @@ int	main(int argc, char *argv[])
 		0,                  // stride
 		(void*)0            // array buffer offset
 	);
+
 	while (!glfwWindowShouldClose(sc.win) &&
 			glfwGetKey(sc.win, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		sc.time.curr = glfwGetTime();
 		sc.time.delta = (float)(sc.time.curr - sc.time.last);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		recalc_mvp(&sc);//
 		GLuint m_id = glGetUniformLocation(program_id, "MVP");
 		glUniformMatrix4fv(m_id, 1, GL_TRUE, (const GLfloat *)sc.mvp);

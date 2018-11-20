@@ -1,43 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_f.c                                          :+:      :+:    :+:   */
+/*   face_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 14:35:44 by lmarques          #+#    #+#             */
-/*   Updated: 2018/11/20 15:58:45 by lmarques         ###   ########.fr       */
+/*   Created: 2018/11/20 16:24:14 by lmarques          #+#    #+#             */
+/*   Updated: 2018/11/20 16:30:53 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scop.h"
 
-
-
-void	check_index(void *array, int array_size, int max_size)
+int	get_v_size(t_scop *sc)
 {
 	int	count;
+	int	count_v;
 
 	count = -1;
-	while (++count < array_size)
-	{
-		if (((int *)array)[count] > max_size)
-			puterr(ERR_BAD_FORMAT);
-	}
+	count_v = 0;
+	while (++count < sc->f_size)
+		count_v += sc->f_array[count].v_size;
+	return (count_v);
 }
 
-void	check_f(t_scop *sc)
+int	get_vt_size(t_scop *sc)
 {
 	int	count;
+	int	count_vt;
 
 	count = -1;
+	count_vt = 0;
 	while (++count < sc->f_size)
-	{
-		check_index(sc->f_array[count].v, sc->f_array[count].v_size,
-			sc->v_size);
-		check_index(sc->f_array[count].vt, sc->f_array[count].vt_size,
-			sc->vt_size);
-		check_index(sc->f_array[count].vn, sc->f_array[count].vn_size,
-			sc->vn_size);
-	}
+		count_vt += sc->f_array[count].vt_size;
+	return (count_vt);
+}
+
+int	get_vn_size(t_scop *sc)
+{
+	int	count;
+	int	count_vn;
+
+	count = -1;
+	count_vn = 0;
+	while (++count < sc->f_size)
+		count_vn += sc->f_array[count].vn_size;
+	return (count_vn);
 }

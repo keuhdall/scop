@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/11/19 15:11:10 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/20 18:36:14 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,19 @@ typedef struct			s_bmp
 
 typedef struct			s_scop
 {
+	int					tmp_v_size;
+	int					tmp_vt_size;
+	int					tmp_vn_size;
+	t_vec3				*tmp_v_array;
+	t_vec2				*tmp_vt_array;
+	t_vec3				*tmp_vn_array;
 	int					v_size;
 	int					vt_size;
 	int					vn_size;
-	int					f_size;
 	t_vec3				*v_array;
 	t_vec2				*vt_array;
 	t_vec3				*vn_array;
+	int					f_size;
 	t_face				*f_array;
 	t_bmp				bmp;
 	t_vec4				*mvp;
@@ -170,6 +176,10 @@ void					puterr(const int err);
 
 void					read_file(char *name, t_scop *s);
 void					init(t_scop *s);
+
+int						get_v_size(t_scop *sc);
+int						get_vt_size(t_scop *sc);
+int						get_vn_size(t_scop *sc);
 
 void					parse_v(char *line, t_scop *s);
 void					parse_vt(char *line, t_scop *s);
