@@ -212,7 +212,7 @@ int	main(int argc, char *argv[])
 	ft_bzero(&sc, sizeof(sc));
 	if (argc > 1)
 		read_file(argv[1], &sc);
-	//check_f(&sc);
+	check_f(&sc);
 	init(&sc);
 	read_arrays(&sc);
 	resolve_f(&sc);

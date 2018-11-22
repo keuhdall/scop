@@ -34,10 +34,10 @@ void	check_f(t_scop *sc)
 	while (++count < sc->f_size)
 	{
 		check_index(sc->f_array[count].v, sc->f_array[count].v_size,
-			sc->v_size);
+			sc->tmp_v_size);
 		check_index(sc->f_array[count].vt, sc->f_array[count].vt_size,
-			sc->vt_size);
+			sc->tmp_vt_size);
 		check_index(sc->f_array[count].vn, sc->f_array[count].vn_size,
-			sc->vn_size);
+			sc->tmp_vn_size);
 	}
 }
