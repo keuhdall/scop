@@ -31,6 +31,7 @@ SRC_NAME = scop.c \
 		   check_f.c \
 			controls.c \
 			face_utils.c \
+			fill_face.c \
 			init.c \
 			matrix.c \
 			matrix2.c \

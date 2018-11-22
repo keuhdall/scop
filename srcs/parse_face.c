@@ -71,6 +71,5 @@ void	resolve_f(t_scop *sc)
 		!(sc->vn_array = (t_vec3 *)malloc(sizeof(t_vec3) * sc->vn_size)))
 		puterr(ERR_MALLOC_FAILED);
 	while (++count < sc->f_size)
-	{
-	}
+		resolve_arrays(sc, sc->f_array[count]);
 }

@@ -24,9 +24,10 @@ void	parse_v(char *line, t_scop *sc)
 	v3.y = atof(a[2]);
 	v3.z = atof(a[3]);
 	free_array(a);
-	sc->v_size++;
-	sc->v_array = ft_realloc(sc->v_array, sizeof(t_vec3) * sc->v_size);
-	sc->v_array[sc->v_size - 1] = v3;
+	sc->tmp_v_size++;
+	sc->tmp_v_array = ft_realloc(sc->tmp_v_array, sizeof(t_vec3) *
+		sc->tmp_v_size);
+	sc->tmp_v_array[sc->tmp_v_size - 1] = v3;
 }
 
 void	parse_vt(char *line, t_scop *sc)
@@ -40,9 +41,10 @@ void	parse_vt(char *line, t_scop *sc)
 	v2.x = atof(a[1]);
 	v2.y = atof(a[2]);
 	free_array(a);
-	sc->vt_size++;
-	sc->vt_array = ft_realloc(sc->vt_array, sizeof(t_vec2) * sc->vt_size);
-	sc->vt_array[sc->vt_size - 1] = v2;
+	sc->tmp_vt_size++;
+	sc->tmp_vt_array = ft_realloc(sc->tmp_vt_array, sizeof(t_vec2) *
+		sc->tmp_vt_size);
+	sc->tmp_vt_array[sc->tmp_vt_size - 1] = v2;
 }
 
 void	parse_vn(char *line, t_scop *sc)
@@ -57,9 +59,10 @@ void	parse_vn(char *line, t_scop *sc)
 	v3.y = atof(a[2]);
 	v3.z = atof(a[3]);
 	free_array(a);
-	sc->vn_size++;
-	sc->vn_array = ft_realloc(sc->vn_array, sizeof(t_vec3) * sc->vn_size);
-	sc->vn_array[sc->vn_size - 1] = v3;
+	sc->tmp_vn_size++;
+	sc->tmp_vn_array = ft_realloc(sc->tmp_vn_array, sizeof(t_vec3) *
+		sc->tmp_vn_size);
+	sc->tmp_vn_array[sc->tmp_vn_size - 1] = v3;
 }
 
 void	parse_f(char *line, t_scop *sc)

@@ -168,6 +168,17 @@ void	print_mat(t_vec4 *mat)
 	}
 }
 
+void	print_v(t_scop *sc)
+{
+	for (int i = 0; i < sc->v_size; i++) {
+		printf("%f %f %f", sc->v_array[i].x, sc->v_array[i].y, sc->v_array[i].z);
+		if (i == sc->v_size - 1)
+			printf("\n");
+		else
+			printf(" ; ");
+	}
+}
+
 void	recalc_mvp(t_scop *sc)
 {
 	free(sc->mvp);
@@ -201,10 +212,11 @@ int	main(int argc, char *argv[])
 	ft_bzero(&sc, sizeof(sc));
 	if (argc > 1)
 		read_file(argv[1], &sc);
-	check_f(&sc);
+	//check_f(&sc);
 	init(&sc);
 	read_arrays(&sc);
-	//resolve_f(&sc);
+	resolve_f(&sc);
+	print_v(&sc);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString(GL_VERSION); // version as a string
 	printf("Renderer: %s\n", renderer);
@@ -282,7 +294,7 @@ int	main(int argc, char *argv[])
 		GLuint m_id = glGetUniformLocation(program_id, "MVP");
 		glUniformMatrix4fv(m_id, 1, GL_TRUE, (const GLfloat *)sc.mvp);
 		glUseProgram(program_id);
-		glDrawArrays(GL_TRIANGLES, 0, 3*12);
+		glDrawArrays(GL_TRIANGLES, 0, sc.v_size);
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 		glfwSwapBuffers(sc.win);
