@@ -188,7 +188,8 @@ void					parse_f(char *line, t_scop *s);
 void					fill_f(char *s, t_face *f);
 void					check_f(t_scop *sc);
 void					resolve_f(t_scop *sc);
-void					resolve_arrays(t_scop *sc, t_face f);
+void					push_triangle(t_scop *sc, t_face f, int (*counts)[3]);
+void					push_square(t_scop *sc, t_face f, int (*counts)[3]);
 
 void					parse_bmp(char *name, t_scop *sc);
 GLuint					load_shaders(char *vs_name, char *fs_name);

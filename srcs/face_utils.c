@@ -20,7 +20,12 @@ int	get_v_size(t_scop *sc)
 	count = -1;
 	count_v = 0;
 	while (++count < sc->f_size)
-		count_v += sc->f_array[count].v_size;
+	{
+		if (sc->f_array[count].v_size <= 3)
+			count_v += sc->f_array[count].v_size;
+		else
+			count_v += 6;
+	}
 	return (count_v);
 }
 
@@ -32,7 +37,12 @@ int	get_vt_size(t_scop *sc)
 	count = -1;
 	count_vt = 0;
 	while (++count < sc->f_size)
-		count_vt += sc->f_array[count].vt_size;
+	{
+		if (sc->f_array[count].vt_size <= 3)
+			count_vt += sc->f_array[count].vt_size;
+		else
+			count_vt += 6;
+	}
 	return (count_vt);
 }
 
@@ -44,6 +54,11 @@ int	get_vn_size(t_scop *sc)
 	count = -1;
 	count_vn = 0;
 	while (++count < sc->f_size)
-		count_vn += sc->f_array[count].vn_size;
+	{
+		if (sc->f_array[count].vn_size <= 3)
+			count_vn += sc->f_array[count].vn_size;
+		else
+			count_vn += 6;
+	}
 	return (count_vn);
 }

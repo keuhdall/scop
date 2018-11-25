@@ -60,7 +60,8 @@ void	fill_f(char *s, t_face *f)
 
 void	resolve_f(t_scop *sc)
 {
-	int	count;
+	static int	counts[3] = {0, 0, 0};
+	int			count;
 
 	count = -1;
 	sc->v_size = get_v_size(sc);
@@ -70,6 +71,13 @@ void	resolve_f(t_scop *sc)
 		!(sc->vt_array = (t_vec2 *)malloc(sizeof(t_vec2) * sc->vt_size)) ||
 		!(sc->vn_array = (t_vec3 *)malloc(sizeof(t_vec3) * sc->vn_size)))
 		puterr(ERR_MALLOC_FAILED);
+	printf("v_size : %d ; vt_size : %d ; vn_size : %d\n", sc->v_size, sc->vt_size, sc->vn_size);
 	while (++count < sc->f_size)
-		resolve_arrays(sc, sc->f_array[count]);
+	{
+		printf("count is : %d ; array size is : %d\n", count, sc->f_array[count].v_size);
+		if (sc->f_array[count].v_size <= 3)
+			push_triangle(sc, sc->f_array[count], &counts);
+		else
+			push_square(sc, sc->f_array[count], &counts);
+	}
 }
