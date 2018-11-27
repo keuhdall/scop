@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/11/20 19:29:37 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/27 11:37:28 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ int	main(int argc, char *argv[])
 		read_file(argv[1], &sc);
 	check_f(&sc);
 	init(&sc);
-	read_arrays(&sc);
+//	read_arrays(&sc);
 	resolve_f(&sc);
 	print_v(&sc);
 	const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
@@ -239,7 +239,11 @@ int	main(int argc, char *argv[])
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	//GLuint program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/test.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/test.frag");
-	GLuint program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/tex_cube.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/tex_cube.frag");
+	GLuint program_id = 0;
+	if (sc.vt_size)
+		program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/obj.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/obj.frag");
+	else
+		program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/basic.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/basic.frag");
 
 /*
 	GLuint vertexbuffer;

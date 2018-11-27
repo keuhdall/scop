@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 14:17:29 by lmarques          #+#    #+#             */
-/*   Updated: 2018/11/20 18:16:27 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/27 11:46:21 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	push_triangle(t_scop *sc, t_face f, int	(*counts)[3])
 		printf("(1) Error occured for values :\nv_size : %d ; vt_size : %d ; vn_size : %d\ncounts[0] : %d ; counts[1] : %d ; counts[2] : %d\n", sc->v_size, sc->vt_size, sc->vn_size, *counts[0], *counts[1], *counts[2]);
 		puterr(ERR_BAD_FORMAT);
 	}
-	sc->v_array[*counts[0]] = sc->tmp_v_array[f.v[0]];
-	sc->v_array[*counts[0] + 1] = sc->tmp_v_array[f.v[1]];
-	sc->v_array[*counts[0] + 2] = sc->tmp_v_array[f.v[2]];
+	sc->v_array[*counts[0]] = sc->tmp_v_array[f.v[0] - 1];
+	sc->v_array[*counts[0] + 1] = sc->tmp_v_array[f.v[1] - 1];
+	sc->v_array[*counts[0] + 2] = sc->tmp_v_array[f.v[2] - 1];
 	*counts[0] += 3;
 	if (sc->vt_size)
 	{
-		sc->vt_array[*counts[1]] = sc->tmp_vt_array[f.vt[0]];
-		sc->vt_array[*counts[1] + 1] = sc->tmp_vt_array[f.vt[1]];
-		sc->vt_array[*counts[1] + 2] = sc->tmp_vt_array[f.vt[2]];
+		sc->vt_array[*counts[1]] = sc->tmp_vt_array[f.vt[0] - 1];
+		sc->vt_array[*counts[1] + 1] = sc->tmp_vt_array[f.vt[1] - 1];
+		sc->vt_array[*counts[1] + 2] = sc->tmp_vt_array[f.vt[2] - 1];
 		*counts[1] += 3;
 	}
 	if (sc->vn_size)
 	{
-		sc->vn_array[*counts[2]] = sc->tmp_vn_array[f.vn[0]];
-		sc->vn_array[*counts[2] + 1] = sc->tmp_vn_array[f.vn[1]];
-		sc->vn_array[*counts[2] + 2] = sc->tmp_vn_array[f.vn[2]];
+		sc->vn_array[*counts[2]] = sc->tmp_vn_array[f.vn[0] - 1];
+		sc->vn_array[*counts[2] + 1] = sc->tmp_vn_array[f.vn[1] - 1];
+		sc->vn_array[*counts[2] + 2] = sc->tmp_vn_array[f.vn[2] - 1];
 		*counts[2] += 3;
 	}
 }
@@ -50,31 +50,31 @@ void	push_square(t_scop *sc, t_face f, int (*counts)[3])
 		printf("(2) Error occured for values :\nv_size : %d ; vt_size : %d ; vn_size : %d\ncounts[0] : %d ; counts[1] : %d ; counts[2] : %d\n", sc->v_size, sc->vt_size, sc->vn_size, *counts[0], *counts[1], *counts[2]);
 		puterr(ERR_BAD_FORMAT);
 	}
-	sc->v_array[*counts[0]] = sc->tmp_v_array[f.v[0]];
-	sc->v_array[*counts[0] + 1] = sc->tmp_v_array[f.v[1]];
-	sc->v_array[*counts[0] + 2] = sc->tmp_v_array[f.v[2]];
-	sc->v_array[*counts[0] + 3] = sc->tmp_v_array[f.v[2]];
-	sc->v_array[*counts[0] + 4] = sc->tmp_v_array[f.v[3]];
-	sc->v_array[*counts[0] + 5] = sc->tmp_v_array[f.v[0]];
+	sc->v_array[*counts[0]] = sc->tmp_v_array[f.v[0] - 1];
+	sc->v_array[*counts[0] + 1] = sc->tmp_v_array[f.v[1] - 1];
+	sc->v_array[*counts[0] + 2] = sc->tmp_v_array[f.v[2] - 1];
+	sc->v_array[*counts[0] + 3] = sc->tmp_v_array[f.v[2] - 1];
+	sc->v_array[*counts[0] + 4] = sc->tmp_v_array[f.v[3] - 1];
+	sc->v_array[*counts[0] + 5] = sc->tmp_v_array[f.v[0] - 1];
 	*counts[0] += 6;
 	if (sc->vt_size)
 	{
-		sc->vt_array[*counts[1]] = sc->tmp_vt_array[f.vt[0]];
-		sc->vt_array[*counts[1] + 1] = sc->tmp_vt_array[f.vt[1]];
-		sc->vt_array[*counts[1] + 2] = sc->tmp_vt_array[f.vt[2]];
-		sc->vt_array[*counts[1] + 3] = sc->tmp_vt_array[f.vt[2]];
-		sc->vt_array[*counts[1] + 4] = sc->tmp_vt_array[f.vt[3]];
-		sc->vt_array[*counts[1] + 5] = sc->tmp_vt_array[f.vt[0]];
+		sc->vt_array[*counts[1]] = sc->tmp_vt_array[f.vt[0] - 1];
+		sc->vt_array[*counts[1] + 1] = sc->tmp_vt_array[f.vt[1] - 1];
+		sc->vt_array[*counts[1] + 2] = sc->tmp_vt_array[f.vt[2] - 1];
+		sc->vt_array[*counts[1] + 3] = sc->tmp_vt_array[f.vt[2] - 1];
+		sc->vt_array[*counts[1] + 4] = sc->tmp_vt_array[f.vt[3] - 1];
+		sc->vt_array[*counts[1] + 5] = sc->tmp_vt_array[f.vt[0] - 1];
 		*counts[1] += 6;
 	}
 	if (sc->vn_size)
 	{
-		sc->vn_array[*counts[2]] = sc->tmp_vn_array[f.vn[0]];
-		sc->vn_array[*counts[2] + 1] = sc->tmp_vn_array[f.vn[1]];
-		sc->vn_array[*counts[2] + 2] = sc->tmp_vn_array[f.vn[2]];
-		sc->vn_array[*counts[2] + 3] = sc->tmp_vn_array[f.vn[2]];
-		sc->vn_array[*counts[2] + 4] = sc->tmp_vn_array[f.vn[3]];
-		sc->vn_array[*counts[2] + 5] = sc->tmp_vn_array[f.vn[0]];
+		sc->vn_array[*counts[2]] = sc->tmp_vn_array[f.vn[0] - 1];
+		sc->vn_array[*counts[2] + 1] = sc->tmp_vn_array[f.vn[1] - 1];
+		sc->vn_array[*counts[2] + 2] = sc->tmp_vn_array[f.vn[2] - 1];
+		sc->vn_array[*counts[2] + 3] = sc->tmp_vn_array[f.vn[2] - 1];
+		sc->vn_array[*counts[2] + 4] = sc->tmp_vn_array[f.vn[3] - 1];
+		sc->vn_array[*counts[2] + 5] = sc->tmp_vn_array[f.vn[0] - 1];
 		*counts[2] += 6;
 	}
 }
