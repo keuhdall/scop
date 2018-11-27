@@ -6,13 +6,13 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 14:17:29 by lmarques          #+#    #+#             */
-/*   Updated: 2018/11/27 11:46:21 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/27 13:17:07 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scop.h"
 
-void	push_triangle(t_scop *sc, t_face f, int	(*counts)[3])
+void	push_triangle(t_scop *sc, t_face f, int (*counts)[3])
 {
 	if (sc->v_size <= *counts[0] + 2 ||
 		(sc->vt_size != 0 && sc->vt_size <= *counts[1] + 2) ||

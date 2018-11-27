@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 19:04:25 by lmarques          #+#    #+#             */
-/*   Updated: 2018/08/04 01:16:27 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:19:58 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,13 @@ void			read_header(t_scop *sc, int fd)
 		3 * sc->bmp.width * sc->bmp.height : *(int *)&header[0x22];
 }
 
-char			*get_bmp_name(char *line)
-{
-	char	**a;
-	char	*name;
-
-	a = ft_strsplit(line, ' ');
-	name = (!a[1] ? NULL : ft_strdup(a[1]));
-	free_array(a);
-	return (name);
-}
-
-void			parse_bmp(char *line, t_scop *sc)
+void			parse_bmp(char *name, t_scop *sc)
 {
 	int				count;
-	char			*name;
 	int				fd;
 	unsigned char	tmp;
 
 	count = 0;
-	if (!(name = get_bmp_name(line)))
-		puterr(ERR_INVALID_BMP);
 	printf("trying to open file : %s\n", name);
 	fd = open(name, O_RDONLY);
 	read_header(sc, fd);

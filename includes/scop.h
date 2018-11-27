@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:06:09 by lmarques          #+#    #+#             */
-/*   Updated: 2018/11/20 18:36:14 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:20:44 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void					free_array(char **a);
 float					degrees_to_rad(float d);
 void					puterr(const int err);
 
-void					read_file(char *name, t_scop *s);
+void					read_file(char *name, t_scop *s, char *tex);
 void					init(t_scop *s);
 
 int						get_v_size(t_scop *sc);

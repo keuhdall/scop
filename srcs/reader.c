@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 19:05:10 by lmarques          #+#    #+#             */
-/*   Updated: 2018/03/17 13:20:44 by lmarques         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:59:40 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	get_line_type(char *line, t_scop *sc)
 {
+	printf("current line is : %s\n", line);
 	if (!strncmp(line, "vt", 2))
 		parse_vt(line, sc);
 	else if (!strncmp(line, "vn", 2))
@@ -22,11 +23,9 @@ void	get_line_type(char *line, t_scop *sc)
 		parse_v(line, sc);
 	else if (!strncmp(line, "f", 1))
 		parse_f(line, sc);
-	else if (!strncmp(line, "usemtl", 6))
-		parse_bmp(line, sc);
 }
 
-void	read_file(char *name, t_scop *sc)
+void	read_file(char *name, t_scop *sc, char *tex)
 {
 	int		fd;
 	int		ret;
@@ -42,4 +41,6 @@ void	read_file(char *name, t_scop *sc)
 	}
 	free(line);
 	close(fd);
+	if (tex)
+		parse_bmp(tex, sc);
 }
