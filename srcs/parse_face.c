@@ -15,7 +15,7 @@
 void	fill_f1(char *s, t_face *f)
 {
 	f->v_size++;
-	f->v = ft_realloc(f->v, sizeof(int) * f->v_size);
+	f->v = realloc(f->v, sizeof(int) * f->v_size);
 	f->v[f->v_size - 1] = atoi(s);
 }
 
@@ -23,8 +23,8 @@ void	fill_f2(char **a, t_face *f)
 {
 	f->v_size++;
 	f->vt_size++;
-	f->v = ft_realloc(f->v, sizeof(int) * f->v_size);
-	f->vt = ft_realloc(f->vt, sizeof(int) * f->vt_size);
+	f->v = realloc(f->v, sizeof(int) * f->v_size);
+	f->vt = realloc(f->vt, sizeof(int) * f->vt_size);
 	f->v[f->v_size - 1] = atoi(a[0]);
 	f->vt[f->vt_size - 1] = atoi(a[1]);
 }
@@ -34,9 +34,9 @@ void	fill_f3(char **a, t_face *f)
 	f->v_size++;
 	f->vt_size++;
 	f->vn_size++;
-	f->v = ft_realloc(f->v, sizeof(int) * f->v_size);
-	f->vt = ft_realloc(f->vt, sizeof(int) * f->vt_size);
-	f->vn = ft_realloc(f->vn, sizeof(int) * f->vn_size);
+	f->v = realloc(f->v, sizeof(int) * f->v_size);
+	f->vt = realloc(f->vt, sizeof(int) * f->vt_size);
+	f->vn = realloc(f->vn, sizeof(int) * f->vn_size);
 	f->v[f->v_size - 1] = atoi(a[0]);
 	f->vt[f->vt_size - 1] = atoi(a[1]);
 	f->vn[f->vn_size - 1] = atoi(a[2]);
