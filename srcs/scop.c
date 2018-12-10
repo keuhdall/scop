@@ -119,7 +119,7 @@ int	main(int argc, char *argv[])
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	GLuint program_id = 0;
-	if (sc.vt_size)
+	if (sc.vt_size && argc > 2)
 		program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/obj.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/obj.frag");
 	else
 		program_id = load_shaders("/Users/lmarques/Desktop/scop/srcs/shaders/basic.vert", "/Users/lmarques/Desktop/scop/srcs/shaders/basic.frag");
